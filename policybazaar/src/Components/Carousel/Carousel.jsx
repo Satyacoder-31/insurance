@@ -1,6 +1,7 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { Link } from "react-router-dom";
 
 import "../Home/Home.css";
 
@@ -13,12 +14,12 @@ const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 3,
-    slidesToSlide: 3,
+    slidesToSlide: 1,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
     items: 2,
-    slidesToSlide: 2,
+    slidesToSlide: 1,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
@@ -29,7 +30,7 @@ const responsive = {
 
 const Carosuel = () => {
   return (
-    <div className="App" style={{ marginRight: "70px" }}>
+    <div className="App" style={{ marginRight: "30px" }}>
       <Carousel
         swipeable={true}
         draggable={true}
@@ -37,217 +38,151 @@ const Carosuel = () => {
         responsive={responsive}
         ssr={false}
         infinite={true}
-        autoPlaySpeed={1000}
+        autoPlay={true}
+        autoPlaySpeed={3500}
         keyBoardControl={false}
-        customTransition="all .5"
+        customTransition="all .5s"
         transitionDuration={500}
         containerClass="carousel-container"
         removeArrowOnDeviceType={["tablet", "mobile", "desktop"]}
         itemClass="carousel-item-padding-40-px"
-        style={{ marginTop: "5%" }}
+        style={{ marginTop: "3%" }}
       >
-        <div
-          style={{
-            marginLeft: "9%",
-            position: "absolute",
-            marginRight: "10%",
-            height: "400px",
-            marginBottom: "5%",
-          }}
-        >
-          <img
-            style={{ position: "absolute", marginTop: "10%", marginLeft: "6%" }}
-            src={hert}
-            alt="heart"
-          />
-          <p
+        {/* Slide 1: Health Insurance */}
+        <Link to="/health" style={{ textDecoration: "none" }}>
+          <div
             style={{
-              position: "absolute",
+              position: "relative",
+              width: "360px",
+              height: "190px",
+              borderRadius: "16px",
+              background: "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)",
+              padding: "24px",
               color: "white",
-              fontSize: "10px",
-              fontWeight: "500",
-              marginTop: "15%",
-              marginLeft: "5%",
+              overflow: "hidden",
+              boxShadow: "0 10px 25px -5px rgba(79, 70, 229, 0.4)",
+              margin: "0 auto",
             }}
           >
-            Health Insurance
-          </p>
-          <p
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
+              <img src={hert} alt="heart" style={{ width: "20px", height: "20px" }} />
+              <span style={{ fontSize: "12px", fontWeight: "700", letterSpacing: "1px", textTransform: "uppercase", opacity: 0.9 }}>
+                Health Insurance
+              </span>
+            </div>
+            <h3 style={{ fontSize: "20px", fontWeight: "700", lineHeight: "1.3", margin: "0 0 8px 0", color: "#ffffff" }}>
+              Star Health, Care, HDFC ERGO, Niva Bupa & ABSL
+            </h3>
+            <p style={{ fontSize: "13px", opacity: 0.85, margin: 0 }}>
+              Cashless hospital network across India with instant quotes.
+            </p>
+            <span style={{ display: "inline-block", marginTop: "14px", fontSize: "12px", fontWeight: "700", background: "rgba(255,255,255,0.25)", padding: "4px 12px", borderRadius: "20px" }}>
+              Explore Health Plans →
+            </span>
+          </div>
+        </Link>
+
+        {/* Slide 2: Life Insurance */}
+        <Link to="/plans" style={{ textDecoration: "none" }}>
+          <div
             style={{
-              position: "absolute",
-              marginTop: "25%",
-              fontSize: "22px",
-              width: "200px",
+              position: "relative",
+              width: "360px",
+              height: "190px",
+              borderRadius: "16px",
+              background: "linear-gradient(135deg, #0284c7 0%, #2563eb 100%)",
+              padding: "24px",
               color: "white",
-              fontWeight: "500",
-              marginLeft: "5%",
-              fontFamily: "Roboto",
+              overflow: "hidden",
+              boxShadow: "0 10px 25px -5px rgba(37, 99, 235, 0.4)",
+              margin: "0 auto",
             }}
           >
-            Protect yourself & your family against <strong>Covid-19</strong>
-          </p>
-          <img
-            style={{ position: "absolute", marginLeft: "80%", marginTop: "5%" }}
-            src={virs}
-            alt="virus"
-          />
-          <img
-            src={po2}
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
+              <img src={hert} alt="heart" style={{ width: "20px", height: "20px" }} />
+              <span style={{ fontSize: "12px", fontWeight: "700", letterSpacing: "1px", textTransform: "uppercase", opacity: 0.9 }}>
+                Life Insurance
+              </span>
+            </div>
+            <h3 style={{ fontSize: "20px", fontWeight: "700", lineHeight: "1.3", margin: "0 0 8px 0", color: "#ffffff" }}>
+              ICICI Pru, Axis Max, ABSL, HDFC, TATA AIA, SBI
+            </h3>
+            <p style={{ fontSize: "13px", opacity: 0.85, margin: 0 }}>
+              Up to ₹1 Cr term cover with high claim settlement ratios.
+            </p>
+            <span style={{ display: "inline-block", marginTop: "14px", fontSize: "12px", fontWeight: "700", background: "rgba(255,255,255,0.25)", padding: "4px 12px", borderRadius: "20px" }}>
+              Compare Life Quotes →
+            </span>
+          </div>
+        </Link>
+
+        {/* Slide 3: General Insurance */}
+        <Link to="/term" style={{ textDecoration: "none" }}>
+          <div
             style={{
-              backgroundColor: "#7080FA",
-              width: "368px",
-              height: "185px",
-              borderRadius: "15px",
-            }}
-            alt="blue"
-          />
-        </div>
-        <div style={{ marginLeft: "10%", position: "absolute" }}>
-          <img
-            style={{ position: "absolute", marginTop: "10%", marginLeft: "6%" }}
-            src={hert}
-            alt="heart"
-          />
-          <p
-            style={{
-              position: "absolute",
+              position: "relative",
+              width: "360px",
+              height: "190px",
+              borderRadius: "16px",
+              background: "linear-gradient(135deg, #059669 0%, #10b981 100%)",
+              padding: "24px",
               color: "white",
-              fontSize: "10px",
-              fontWeight: "500",
-              marginTop: "15%",
-              marginLeft: "5%",
+              overflow: "hidden",
+              boxShadow: "0 10px 25px -5px rgba(16, 185, 129, 0.4)",
+              margin: "0 auto",
             }}
           >
-            Investment Plans
-          </p>
-          <p
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
+              <img src={hert} alt="heart" style={{ width: "20px", height: "20px" }} />
+              <span style={{ fontSize: "12px", fontWeight: "700", letterSpacing: "1px", textTransform: "uppercase", opacity: 0.9 }}>
+                General Insurance Co. Ltd
+              </span>
+            </div>
+            <h3 style={{ fontSize: "19px", fontWeight: "700", lineHeight: "1.3", margin: "0 0 8px 0", color: "#ffffff" }}>
+              SBI, TATA AIG, BAJAJ, ICICI Lombard, Go Digit, HDFC ERGO
+            </h3>
+            <p style={{ fontSize: "13px", opacity: 0.85, margin: 0 }}>
+              Premier general insurance coverage and hassle-free claim support.
+            </p>
+            <span style={{ display: "inline-block", marginTop: "14px", fontSize: "12px", fontWeight: "700", background: "rgba(255,255,255,0.25)", padding: "4px 12px", borderRadius: "20px" }}>
+              Get General Quotes →
+            </span>
+          </div>
+        </Link>
+
+        {/* Slide 4: Ask SafeLife */}
+        <Link to="/login" style={{ textDecoration: "none" }}>
+          <div
             style={{
-              position: "absolute",
-              marginTop: "25%",
-              fontSize: "22px",
-              width: "200px",
+              position: "relative",
+              width: "360px",
+              height: "190px",
+              borderRadius: "16px",
+              background: "linear-gradient(135deg, #ea580c 0%, #f97316 100%)",
+              padding: "24px",
               color: "white",
-              fontWeight: "500",
-              marginLeft: "5%",
-              fontFamily: "Roboto",
+              overflow: "hidden",
+              boxShadow: "0 10px 25px -5px rgba(234, 88, 12, 0.4)",
+              margin: "0 auto",
             }}
           >
-            Invest ₹10k and Get <strong>₹1 Crore</strong> return*{" "}
-          </p>
-          <img
-            style={{ position: "absolute", marginLeft: "80%", marginTop: "5%" }}
-            src={virs}
-            alt="virus"
-          />
-          <img
-            src={po1}
-            style={{
-              backgroundColor: "#4FDC95",
-              width: "368px",
-              height: "185px",
-              borderRadius: "15px",
-              marginRight: "2%",
-            }}
-            alt="blue"
-          />
-        </div>
-        <div style={{ marginLeft: "10%", position: "absolute" }}>
-          <img
-            style={{ position: "absolute", marginTop: "10%", marginLeft: "6%" }}
-            src={hert}
-            alt="heart"
-          />
-          <p
-            style={{
-              position: "absolute",
-              color: "white",
-              fontSize: "10px",
-              fontWeight: "500",
-              marginTop: "15%",
-              marginLeft: "5%",
-            }}
-          >
-            Home Insurance
-          </p>
-          <p
-            style={{
-              position: "absolute",
-              marginTop: "25%",
-              fontSize: "22px",
-              width: "200px",
-              color: "white",
-              fontWeight: "500",
-              marginLeft: "5%",
-              fontFamily: "Roboto",
-            }}
-          >
-            <strong>₹50 Lakh Cover</strong> for Your Home Insurance at Just{" "}
-            <strong>₹80/month*</strong>{" "}
-          </p>
-          <img
-            style={{ position: "absolute", marginLeft: "80%", marginTop: "5%" }}
-            src={virs}
-            alt="virus"
-          />
-          <img
-            src={po2}
-            style={{
-              backgroundColor: "#3CBBDA",
-              width: "368px",
-              height: "185px",
-              borderRadius: "15px",
-            }}
-            alt="blue"
-          />
-        </div>
-        <div style={{ marginRight: "14%", marginLeft: "10%" }}>
-          <img
-            style={{ position: "absolute", marginTop: "10%", marginLeft: "6%" }}
-            src={hert}
-            alt="heart"
-          />
-          <p
-            style={{
-              position: "absolute",
-              color: "white",
-              fontSize: "10px",
-              fontWeight: "500",
-              marginTop: "15%",
-              marginLeft: "5%",
-            }}
-          >
-            AskPB
-          </p>
-          <p
-            style={{
-              position: "absolute",
-              marginTop: "25%",
-              fontSize: "22px",
-              width: "200px",
-              color: "white",
-              fontWeight: "500",
-              marginLeft: "5%",
-              fontFamily: "Roboto",
-            }}
-          >
-            Got a <strong>question about insurance?</strong> Write to us
-          </p>
-          <img
-            style={{ position: "absolute", marginLeft: "60%", marginTop: "5%" }}
-            src={virs}
-            alt="virus"
-          />
-          <img
-            src={po2}
-            style={{
-              backgroundColor: "#FF9898",
-              width: "368px",
-              height: "195px",
-              borderRadius: "15px",
-            }}
-            alt="blue"
-          />
-        </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
+              <img src={hert} alt="heart" style={{ width: "20px", height: "20px" }} />
+              <span style={{ fontSize: "12px", fontWeight: "700", letterSpacing: "1px", textTransform: "uppercase", opacity: 0.9 }}>
+                Ask SafeLife
+              </span>
+            </div>
+            <h3 style={{ fontSize: "20px", fontWeight: "700", lineHeight: "1.3", margin: "0 0 8px 0", color: "#ffffff" }}>
+              Got Questions on our 17 Partner Insurers?
+            </h3>
+            <p style={{ fontSize: "13px", opacity: 0.85, margin: 0 }}>
+              Speak with a certified SafeLife insurance specialist today.
+            </p>
+            <span style={{ display: "inline-block", marginTop: "14px", fontSize: "12px", fontWeight: "700", background: "rgba(255,255,255,0.25)", padding: "4px 12px", borderRadius: "20px" }}>
+              Talk to Advisor →
+            </span>
+          </div>
+        </Link>
       </Carousel>
     </div>
   );

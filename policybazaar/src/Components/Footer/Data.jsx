@@ -1,25 +1,27 @@
-const FooterData={
-    "Life Insurance":[
-        "Term Insurance","Term Insurance Calculator",
-    "1 Crore Term Insurance","Term Return of Premium"
-    ],
-    "Other Insurance":[
-        "Group Health Insurance","Other General Insurance Products",
-        "Cancer Insurance", "Home Insurance"
-    ],
-    "Health Insurance":[
-        "Health Insurance","1 Cr Health Cover",
-        "Family Health Insurance","Senior Citizen Health Insurance",
-        "Coronavirus Insurance"
-    ],
-    "Investment":[
-        "Investment Plans","Capital Guarantee Plans", 
-        "Investment Plans for NRIs","Child Plans",
-        "Pension Plans", "SIP", "LIC"
-    ],
-    "General Insurance":[
-        "Car Insurance","Bike Insurance", "Motor Insurance",
-        "Third Party Insurance", "Travel Insurance"
-    ]
-}
-export default FooterData
+const FooterData = {
+  "Life Insurance": [
+    "ICICI Prudential Life Insurance",
+    "Axis Max Life",
+    "ABSL Life",
+    "HDFC Life",
+    "Tata AIA Life",
+    "SBI Life"
+  ],
+  "Health Insurance": [
+    "Star Health Insurance",
+    "Care Health Insurance",
+    "HDFC ERGO Health Insurance",
+    "Niva Bupa Health Insurance",
+    "ABSL Health Insurance"
+  ],
+  "General Insurance Co. Ltd": [
+    "SBI General Insurance",
+    "Tata AIG GIC",
+    "Bajaj GIC",
+    "ICICI Lombard GIC",
+    "Go Digit GIC",
+    "HDFC ERGO GIC"
+  ]
+};
+
+export default FooterData;

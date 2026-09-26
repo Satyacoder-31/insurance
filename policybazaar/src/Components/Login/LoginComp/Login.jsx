@@ -1,6 +1,7 @@
 import { useState} from "react";
 import {useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
+import safelifeLogo from "../../../assets/images/safelife-logo.svg";
 
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
@@ -13,7 +14,7 @@ function Login() {
 
   const [page, setPage] = useState(true);
 
-  const { isAuth } = useSelector((store) => store.login);
+  const isAuth = useSelector((store) => store?.login?.isAuth) ?? (JSON.parse(sessionStorage.getItem("loggedInUserInfo"))?.isAuth ?? false);
   const navigate = useNavigate();
 
 
@@ -33,8 +34,9 @@ function Login() {
         </div>
         <div className={lgnstl.logo_div}>
           <img
-            src="https://static.pbcdn.in/cdn/images/new-home/logopb.svg?v=2"
-            alt="logo"
+            src={safelifeLogo}
+            alt="SafeLife"
+            style={{ width: "180px", height: "48px", objectFit: "contain" }}
           />
         </div>
         <div className={lgnstl.title_div}>

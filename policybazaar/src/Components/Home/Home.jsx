@@ -1,931 +1,568 @@
-import { styled } from "@mui/material/styles";
+import React, { useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import Carousel from "../Carousel/Carousel";
-
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-
 import "./Home.css";
 
-import thunder from "../../assets/images/thuder.png";
-import thunder1 from "../../assets/images/thuder1.png";
-import umre from "../../assets/images/Umbrella1.png";
-import bk from "../../assets/images/bk.png";
-import car1 from "../../assets/images/car1.png";
-import Fam1 from "../../assets/images/Fam1.png";
-import box from "../../assets/images/boxz1.png";
-import cr from "../../assets/images/cr1.png";
-import bacha from "../../assets/images/bacha1.png";
-import tra from "../../assets/images/trv1.png";
-import pepl from "../../assets/images/pepl.png";
-import left from "../../assets/images/left-bg.webp";
-import right from "../../assets/images/right-bg.png";
-import part from "../../assets/images/Party1.png";
-import sear1 from "../../assets/images/sear1.png";
-import sear2 from "../../assets/images/sear2.png";
-import sear3 from "../../assets/images/sear3.png";
 import Pri1 from "../../assets/images/Pri1.png";
 import Pri2 from "../../assets/images/Pri2.png";
 import Pri3 from "../../assets/images/Pri3.png";
 import Pri4 from "../../assets/images/Pri4.png";
 import Pri5 from "../../assets/images/Pri5.png";
-import star from "../../assets/images/star.png";
+import part from "../../assets/images/Party1.png";
+import sear1 from "../../assets/images/sear1.png";
+import sear2 from "../../assets/images/sear2.png";
+import sear3 from "../../assets/images/sear3.png";
 import bigp from "../../assets/images/bigp.png";
 import Ap1 from "../../assets/images/Ap1.png";
 import Ap2 from "../../assets/images/Ap2.png";
-import o1 from "../../assets/images/o1.png";
-import o2 from "../../assets/images/o2.png";
-import o3 from "../../assets/images/o3.png";
-import o4 from "../../assets/images/o4.png";
-import o5 from "../../assets/images/o5.png";
-import o6 from "../../assets/images/o6.png";
-import o7 from "../../assets/images/o7.png";
-import o8 from "../../assets/images/o8.png";
-import o9 from "../../assets/images/o9.png";
-import o0 from "../../assets/images/o0.png";
-import k1 from "../../assets/images/k1.png";
-import k2 from "../../assets/images/k2.png";
-import k3 from "../../assets/images/k3.png";
-import k4 from "../../assets/images/k4.png";
-import k5 from "../../assets/images/k5.png";
-import k6 from "../../assets/images/k6.png";
-import k7 from "../../assets/images/k7.png";
-import k8 from "../../assets/images/k8.png";
-import k9 from "../../assets/images/k9.png";
-import k0 from "../../assets/images/k0.png";
 import invest1 from "../../assets/images/invest1.png";
 import invest2 from "../../assets/images/invest2.png";
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  height: "65%",
-  color: theme.palette.text.secondary,
-}));
+import { FiUmbrella, FiSearch, FiCheckCircle, FiShield, FiTrendingUp, FiArrowRight } from "react-icons/fi";
+import { FaHeartbeat } from "react-icons/fa";
+import { AiTwotoneInsurance, AiFillThunderbolt } from "react-icons/ai";
+
+const DEALT_PRODUCTS = {
+  life: {
+    category: "Life Insurance",
+    icon: <FiUmbrella size={22} color="#2563eb" />,
+    themeClass: "theme-life",
+    badgeColor: "#eff6ff",
+    textColor: "#1d4ed8",
+    route: "/plans?category=life",
+    items: [
+      { id: "l1", name: "ICICI Prudential Life Insurance", sub: "Terminal Illness & Critical Illness Cover", highlight: "98.9% Settlement", tag: "Top Rated", cover: "₹1 Cr Cover", price: "From ₹490/mo", features: ["100% payout on terminal illness", "Waiver of premium on disability", "Tax benefit u/s 80C"] },
+      { id: "l2", name: "Axis Max Life", sub: "Comprehensive Term & Life Protection", highlight: "96.5% Settlement", tag: "Popular", cover: "₹1 Cr Cover", price: "From ₹465/mo", features: ["Increasing cover option", "Special non-smoker rates", "Critical illness rider"] },
+      { id: "l3", name: "ABSL Life", sub: "Aditya Birla Sun Life Insurance Plans", highlight: "97.4% Settlement", tag: "Flexible", cover: "₹75 Lac Cover", price: "From ₹420/mo", features: ["Flexible tenure up to 85 yrs", "Accidental death benefit", "Return of premium available"] },
+      { id: "l4", name: "HDFC Life", sub: "Instant Digital Quotes & High Claim Ratio", highlight: "97.9% Settlement", tag: "Top Pick", cover: "₹1 Cr Cover", price: "From ₹520/mo", features: ["Life Long Cover up to 99 Yrs", "Instant paperless approval", "3D Life Shield cover"] },
+      { id: "l5", name: "TATA AIA Life", sub: "Waiver of Premium & Accidental Cover", highlight: "99.0% Settlement", tag: "Highest CSR", cover: "₹1 Cr Cover", price: "From ₹499/mo", features: ["Industry-highest claim ratio", "Vitality health rewards", "Zero cost surrender value"] },
+      { id: "l6", name: "SBI Life", sub: "Government-backed Trust & Nationwide Network", highlight: "97.1% Settlement", tag: "Trusted", cover: "₹1 Cr Cover", price: "From ₹440/mo", features: ["Trusted nationwide brand", "Joint life option for spouse", "Simple claims process"] }
+    ]
+  },
+  health: {
+    category: "Health Insurance",
+    icon: <FaHeartbeat size={22} color="#ef4444" />,
+    themeClass: "theme-health",
+    badgeColor: "#fef2f2",
+    textColor: "#b91c1c",
+    route: "/plans?category=health",
+    items: [
+      { id: "h1", name: "STAR HEALTH INSURANCE", sub: "Specialist Health & Daycare Procedures", highlight: "14,000+ Hospitals", tag: "Market Leader", cover: "₹10-50 Lac Cover", price: "From ₹599/mo", features: ["Zero copayment across network", "Modern treatments covered", "Pre & post hospitalisation"] },
+      { id: "h2", name: "CARE HEALTH INSURANCE", sub: "Annual Health Checkup & Unlimited Recharge", highlight: "11,000+ Hospitals", tag: "Zero Deductible", cover: "₹10 Lac - 1 Cr", price: "From ₹649/mo", features: ["Automatic sum insured reload", "Annual health check-up", "No claim bonus up to 150%"] },
+      { id: "h3", name: "HDFC ERGO HEALTH INSURANCE", sub: "Zero Copay & Emergency Worldwide Coverage", highlight: "12,000+ Hospitals", tag: "Fast Approvals", cover: "₹10-25 Lac Cover", price: "From ₹720/mo", features: ["Instant cashless in 20 mins", "Worldwide emergency cover", "Restore benefit included"] },
+      { id: "h4", name: "NIVA BUPA HEALTH INSURANCE", sub: "30-min Cashless Claim Guarantee", highlight: "10,000+ Hospitals", tag: "Instant Card", cover: "₹10-30 Lac Cover", price: "From ₹580/mo", features: ["30-minute claim processing", "OPD & pharmacy coverage", "Lock the clock age discount"] },
+      { id: "h5", name: "ABSL HEALTH INSURANCE", sub: "Aditya Birla Health with HealthReturns™", highlight: "10,500+ Hospitals", tag: "Health Rewards", cover: "₹10-25 Lac Cover", price: "From ₹610/mo", features: ["Earn up to 30% premium back", "Chronic illness management", "Home treatment coverage"] }
+    ]
+  },
+  general: {
+    category: "General Insurance Co. Ltd",
+    icon: <AiTwotoneInsurance size={22} color="#059669" />,
+    themeClass: "theme-general",
+    badgeColor: "#ecfdf5",
+    textColor: "#047857",
+    route: "/plans?category=general",
+    items: [
+      { id: "g1", name: "SBI GENERAL INSURANCE", sub: "Complete Enterprise & Property Shield", highlight: "Pan-India Network", tag: "Reliable", cover: "Total Asset Cover", price: "Tailored Quote", features: ["Nationwide claims presence", "Comprehensive liability options", "Flexible commercial riders"] },
+      { id: "g2", name: "TATA AIG GIC", sub: "End-to-End Asset & Liability Protection", highlight: "96.8% Claim Ratio", tag: "Excellence", cover: "Comprehensive Cover", price: "Instant Quote", features: ["24x7 roadside & asset assist", "Digital paperless survey", "Quick cashless network"] },
+      { id: "g3", name: "BAJAJ GIC", sub: "Digital Onboarding & Instant Claim Support", highlight: "98.1% Claim Ratio", tag: "Speedy Claims", cover: "Multi-Risk Cover", price: "Digital Quote", features: ["Motor OTS spot settlement", "Personal accident add-ons", "Instant digital policy renewal"] },
+      { id: "g4", name: "ICICI LOMBARD GIC", sub: "Premier Corporate & General Insurance", highlight: "24x7 Assist", tag: "Industry Leader", cover: "High-Value Shield", price: "Instant Quote", features: ["IL Take Care app integration", "Cashless garage & asset ties", "Dedicated relationship manager"] },
+      { id: "g5", name: "GO DIGIT GIC", sub: "Smartphone-enabled 100% Paperless Claims", highlight: "Digital First", tag: "Simple & Swift", cover: "Custom Risk Cover", price: "From ₹399/mo", features: ["Smartphone audio/video claims", "Zero physical paperwork", "Transparent claims policy"] },
+      { id: "g6", name: "HDFC ERGO GIC", sub: "Comprehensive General & Commercial Risk Cover", highlight: "97.3% Settlement", tag: "Award Winning", cover: "All-Round Shield", price: "Custom Quote", features: ["AI-backed instant claims", "Zero depreciation add-ons", "End-to-end commercial protection"] }
+    ]
+  }
+};
 
 const HomePage = () => {
+  const [activeTab, setActiveTab] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Aggregate all 17 items with category meta
+  const allDealtProducts = useMemo(() => {
+    return [
+      ...DEALT_PRODUCTS.life.items.map(item => ({ ...item, categoryKey: 'life', categoryName: 'Life Insurance', route: DEALT_PRODUCTS.life.route })),
+      ...DEALT_PRODUCTS.health.items.map(item => ({ ...item, categoryKey: 'health', categoryName: 'Health Insurance', route: DEALT_PRODUCTS.health.route })),
+      ...DEALT_PRODUCTS.general.items.map(item => ({ ...item, categoryKey: 'general', categoryName: 'General Insurance Co. Ltd', route: DEALT_PRODUCTS.general.route })),
+    ];
+  }, []);
+
+  // Filter based on active tab and search query
+  const filteredProducts = useMemo(() => {
+    let list = allDealtProducts;
+    if (activeTab !== "all") {
+      list = list.filter(item => item.categoryKey === activeTab);
+    }
+    if (searchQuery.trim() !== "") {
+      const q = searchQuery.toLowerCase();
+      list = list.filter(item => 
+        item.name.toLowerCase().includes(q) || 
+        item.sub.toLowerCase().includes(q) ||
+        item.categoryName.toLowerCase().includes(q) ||
+        item.tag.toLowerCase().includes(q)
+      );
+    }
+    return list;
+  }, [allDealtProducts, activeTab, searchQuery]);
+
   return (
-    <>
-      <div className="home-main">
-        <div className="home-total">
-          <div className="home-head">
-            <p>
+    <div className="safelife-home-page">
+      {/* Hero Section */}
+      <section className="safelife-hero-section">
+        <div className="safelife-hero-container">
+          <div className="safelife-hero-content">
+            <div className="safelife-badge-pill">
+              <FiShield className="badge-icon" /> 17 AUTHORIZED PARTNER INSURERS
+            </div>
+            
+            <h1 className="safelife-hero-title">
               Let's find you <br />
-              the <b>Best Insurance</b>
+              the <span className="hero-gradient-text">Best Insurance with SafeLife</span>
+            </h1>
+
+            <p className="safelife-hero-desc">
+              Compare transparent quotes across Life, Health, and General Insurance from India's 17 top authorized insurance providers. No agent bias, 100% digital issuance, and 30-minute claim assistance.
+            </p>
+
+            {/* Quick Hero Features */}
+            <div className="safelife-hero-chips">
+              <div className="hero-chip">
+                <AiFillThunderbolt color="#f59e0b" size={18} />
+                <span>30-min Instant Cashless</span>
+              </div>
+              <div className="hero-chip">
+                <FiCheckCircle color="#10b981" size={18} />
+                <span>IRDAI Regulated Partners</span>
+              </div>
+              <div className="hero-chip">
+                <FiTrendingUp color="#3b82f6" size={18} />
+                <span>Up to 10% Online Savings</span>
+              </div>
+            </div>
+
+            {/* Interactive Search Bar in Hero */}
+            <div className="safelife-hero-search">
+              <FiSearch className="search-icon" size={20} />
+              <input 
+                type="text"
+                placeholder="Search any of our 17 insurers (e.g. HDFC, ICICI, Star, TATA, SBI, Care, Digit...)"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              {searchQuery && (
+                <button className="clear-search-btn" onClick={() => setSearchQuery("")}>✕</button>
+              )}
+            </div>
+          </div>
+
+          {/* Hero Highlight Card */}
+          <div className="safelife-hero-card-col">
+            <div className="safelife-hero-cta-card">
+              <div className="card-top-tag">SafeLife Guarantee</div>
+              <h3>Authorized Partner Network</h3>
+              <p>
+                Get direct access to certified advisors and official premiums for all 17 leading insurance companies.
+              </p>
+              
+              <div className="cta-card-stats">
+                <div>
+                  <h4>17</h4>
+                  <span>Partner Insurers</span>
+                </div>
+                <div>
+                  <h4>98.5%</h4>
+                  <span>Avg Settlement</span>
+                </div>
+                <div>
+                  <h4>₹0</h4>
+                  <span>Consultation Fee</span>
+                </div>
+              </div>
+
+              <Link to="/plans" className="cta-primary-btn">
+                Compare All Quotes Now <FiArrowRight style={{ marginLeft: "8px" }} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Live Trust Metrics Bar */}
+      <section className="safelife-stats-strip">
+        <div className="safelife-stats-grid">
+          <div className="stat-item">
+            <span className="stat-number">9+ Million</span>
+            <span className="stat-label">Happy Customers Insured</span>
+          </div>
+          <div className="stat-divider"></div>
+          <div className="stat-item">
+            <span className="stat-number">17 Insurers</span>
+            <span className="stat-label">Life, Health & General Partners</span>
+          </div>
+          <div className="stat-divider"></div>
+          <div className="stat-item">
+            <span className="stat-number">₹500+ Cr</span>
+            <span className="stat-label">Claims Settled Till Date</span>
+          </div>
+          <div className="stat-divider"></div>
+          <div className="stat-item">
+            <span className="stat-number">100%</span>
+            <span className="stat-label">IRDAI Certified & Regulated</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Products Showcase Section */}
+      <section className="safelife-products-section">
+        <div className="safelife-section-header">
+          <div>
+            <div className="section-pill">EXCLUSIVE PORTFOLIO</div>
+            <h2 className="section-title">Insurance Products We Deal</h2>
+            <p className="section-subtitle">
+              We exclusively partner with India's top 17 insurers to provide you the highest claim ratios, widest hospital networks, and best value premiums.
             </p>
           </div>
 
-          <div>
-            <img
-              src="https://static.pbcdn.in/cdn/images/home/banner_savetax.png?v=1"
-              alt="aksh"
-              className="home-img2"
-            />
+          {/* Filter Tabs */}
+          <div className="safelife-category-tabs">
+            <button 
+              className={`tab-btn ${activeTab === 'all' ? 'active' : ''}`}
+              onClick={() => setActiveTab('all')}
+            >
+              All Products <span className="tab-count">17</span>
+            </button>
+            <button 
+              className={`tab-btn tab-life ${activeTab === 'life' ? 'active' : ''}`}
+              onClick={() => setActiveTab('life')}
+            >
+              <FiUmbrella size={15} /> Life Insurance <span className="tab-count">6</span>
+            </button>
+            <button 
+              className={`tab-btn tab-health ${activeTab === 'health' ? 'active' : ''}`}
+              onClick={() => setActiveTab('health')}
+            >
+              <FaHeartbeat size={15} /> Health Insurance <span className="tab-count">5</span>
+            </button>
+            <button 
+              className={`tab-btn tab-general ${activeTab === 'general' ? 'active' : ''}`}
+              onClick={() => setActiveTab('general')}
+            >
+              <AiTwotoneInsurance size={15} /> General Insurance <span className="tab-count">6</span>
+            </button>
           </div>
+        </div>
 
-          <div style={{display:'flex', flexDirection:'row'}}>
-          <div>
+        {/* Results Counter if searching */}
+        {searchQuery.trim() !== "" && (
+          <div className="search-status-bar">
+            <span>Showing {filteredProducts.length} matching insurers for "<strong>{searchQuery}</strong>"</span>
+            <button onClick={() => setSearchQuery("")}>Clear filter</button>
+          </div>
+        )}
+
+        {/* Products Grid */}
+        <div className="safelife-product-grid">
+          {filteredProducts.map((item) => (
+            <div key={item.id} className={`safelife-product-card card-${item.categoryKey}`}>
+              <div className="card-top-row">
+                <span className={`category-badge badge-${item.categoryKey}`}>
+                  {item.categoryName}
+                </span>
+                <span className="card-tag">{item.tag}</span>
+              </div>
+
+              <div className="card-header-main">
+                <div className={`partner-monogram monogram-${item.categoryKey}`}>
+                  {item.name.substring(0, 2).toUpperCase()}
+                </div>
+                <div>
+                  <h3 className="partner-name">{item.name}</h3>
+                  <div className="highlight-pill">
+                    <FiShield size={13} /> {item.highlight}
+                  </div>
+                </div>
+              </div>
+
+              <p className="card-sub-desc">{item.sub}</p>
+
+              <div className="card-coverage-strip">
+                <div>
+                  <span className="cov-label">Estimated Cover</span>
+                  <span className="cov-value">{item.cover}</span>
+                </div>
+                <div className="text-right">
+                  <span className="cov-label">Starting Price</span>
+                  <span className="cov-price">{item.price}</span>
+                </div>
+              </div>
+
+              <ul className="card-feature-list">
+                {item.features.map((feat, idx) => (
+                  <li key={idx}>
+                    <FiCheckCircle size={14} className="feat-check" />
+                    <span>{feat}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="card-footer-actions">
+                <Link to={item.route} className={`btn-card-action btn-${item.categoryKey}`}>
+                  Compare & Buy <FiArrowRight size={14} />
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {filteredProducts.length === 0 && (
+          <div className="no-products-found">
+            <h3>No insurers match your query "{searchQuery}"</h3>
+            <p>Try searching for ICICI, HDFC, SBI, Star, Care, TATA, Axis Max, or Digit.</p>
+            <button onClick={() => setSearchQuery("")} className="btn-reset-search">Reset Search</button>
+          </div>
+        )}
+      </section>
+
+      {/* Featured Highlights Carousel */}
+      <section className="safelife-carousel-section">
+        <div className="carousel-section-container">
+          <div className="text-center mb-8">
+            <div className="section-pill">SPECIAL OFFERINGS</div>
+            <h2 className="section-title">Featured Insurance Highlights</h2>
+            <p className="section-subtitle">
+              Exclusive benefits, instant discounts, and priority claim processing from our 17 partner providers.
+            </p>
+          </div>
+          <Carousel />
+        </div>
+      </section>
+
+      {/* Why Choose SafeLife - Modern Responsive 4 Pillars */}
+      <section className="safelife-why-section">
+        <div className="why-section-container">
+          <div className="why-header">
+            <div className="section-pill">THE SAFELIFE PROMISE</div>
+            <h2>What makes SafeLife the best place to buy insurance?</h2>
             <p>
-              <img className="home-img0" src={thunder} alt="thunder" />
-              <p className="home-cont1">
-                50+ insurers with one of the best prices{" "}
-              </p>
+              We eliminated the headaches of traditional insurance: zero aggressive cold calls, verified quotes from our 17 partners, and dedicated claim advocates.
             </p>
           </div>
 
-          <div>
-            <p>
-              <img className="home-img" src={thunder1} alt="thunder" />
-              <p className="home-cont2">Quick, easy & hassle free</p>
+          <div className="why-cards-grid">
+            <div className="why-card pillar-blue">
+              <div className="why-icon-box">
+                <img src={part} alt="Over 9 Million" />
+              </div>
+              <h3 className="why-card-metric">9+ Million</h3>
+              <h4>Customers Trust Us</h4>
+              <p>Trusted across India for transparent quotes, reliable advisory, and complete peace of mind.</p>
+            </div>
+
+            <div className="why-card pillar-cyan">
+              <div className="why-icon-box">
+                <img src={sear1} alt="17 Top Insurers" />
+              </div>
+              <h3 className="why-card-metric">17 Partner Insurers</h3>
+              <h4>Authorized Network</h4>
+              <p>Official tie-ups with India's top Life, Health, and General insurance brands for direct quotes.</p>
+            </div>
+
+            <div className="why-card pillar-green">
+              <div className="why-icon-box">
+                <img src={sear2} alt="Best Price Guaranteed" />
+              </div>
+              <h3 className="why-card-metric">Best Price</h3>
+              <h4>Guaranteed Online Rates</h4>
+              <p>Zero agent markups. Compare discounts and transparent coverage side-by-side in real time.</p>
+            </div>
+
+            <div className="why-card pillar-amber">
+              <div className="why-icon-box">
+                <img src={sear3} alt="Claims Support" />
+              </div>
+              <h3 className="why-card-metric">30-Min Support</h3>
+              <h4>Dedicated Claim Assist</h4>
+              <p>Our claims specialists stay by your side until your hospital or asset claim is fully settled.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SafeLife Advantage Grid */}
+      <section className="safelife-advantage-section">
+        <div className="advantage-container">
+          <div className="text-center mb-8">
+            <div className="section-pill">OUR COMMITMENT</div>
+            <h2 className="section-title">The SafeLife Advantage</h2>
+            <p className="section-subtitle">
+              Built from the ground up to give you transparency, security, and effortless claims.
             </p>
           </div>
-          </div>
 
-          <div className="home-maind" style={{ marginLeft: "50px" }}>
-            <div className="home-tol">
-              <img src={umre} alt="one" />
-              <p className="home-tm">Travel Insurance </p>
+          <div className="advantage-grid">
+            <div className="advantage-card">
+              <div className="adv-img-box"><img src={Pri1} alt="Best Price" /></div>
+              <h4>Best Prices</h4>
+              <p>Direct online quotes with guaranteed lowest premium rates and special digital discounts.</p>
             </div>
 
-            <div className="home-tol">
-              <img src={Fam1} alt="one" />
-              <p className="home-tm">Family Health Insurance</p>
+            <div className="advantage-card">
+              <div className="adv-img-box"><img src={Pri2} alt="Unbiased Advice" /></div>
+              <h4>Unbiased Advice</h4>
+              <p>Certified experts who recommend policies tailored purely to your family's financial needs.</p>
             </div>
 
-            <div className="home-tol">
-              <img src={bk} alt="one" />
-              <p className="home-tm">2 Wheeler Insurance </p>
+            <div className="advantage-card">
+              <div className="adv-img-box"><img src={Pri3} alt="100% Reliable" /></div>
+              <h4>100% Reliable</h4>
+              <p>Regulated by IRDAI and fully compliant with all consumer financial protection standards.</p>
             </div>
 
-            <div className="home-tol">
-              <img src={car1} alt="one" />
-              <p className="home-tm">Car Insurance</p>
+            <div className="advantage-card">
+              <div className="adv-img-box"><img src={Pri4} alt="Claims Support" /></div>
+              <h4>Claims Support</h4>
+              <p>Stress-free claim settlement assistance with dedicated hospital and insurer liaisons.</p>
             </div>
 
-            <div className="home-tol">
-              <img src={bk} alt="one" />
-              <p className="home-tm">Investment Plans </p>
-            </div>
-
-            <div className="home-tol">
-              <img src={umre} alt="one" />
-              <p className="home-tm">Health Insurance </p>
-            </div>
-
-            <div className="home-tol">
-              <img src={umre} alt="one" />
-              <p className="home-tm">Term Life Insurance </p>
-            </div>
-
-            <div className="home-tol">
-              <img src={box} alt="one" />
-              <p className="home-tm">Home Insurance </p>
-            </div>
-
-            <div className="home-tol">
-              <img src={pepl} alt="one" />
-              <p className="home-tm">Group Health Insurance</p>
-            </div>
-
-            <div className="home-tol">
-              <img src={umre} alt="one" />
-              <p className="home-tm">Retirement Plans </p>
-            </div>
-
-            <div className="home-tol">
-              <img src={bacha} alt="one" />
-              <p className="home-tm">Child Savings Plans</p>
-            </div>
-
-            <div className="home-tol">
-              <img src={tra} alt="one" />
-              <p className="home-tm">Guaranteed Return Plans </p>
-            </div>
-
-            <div className="home-tol" style={{ marginLeft: "6%" }}>
-              <img src={umre} alt="one" />
-              <p className="home-tm">Saral Jeevan Bima </p>
-            </div>
-
-            <div className="home-tol" style={{ marginRight: "-50px" }}>
-              <img src={cr} alt="one" />
-              <p className="home-tm"> Zero Cost Term Plan </p>
+            <div className="advantage-card">
+              <div className="adv-img-box"><img src={Pri5} alt="Happy to Help" /></div>
+              <h4>Happy to Help</h4>
+              <p>24x7 customer helpline, WhatsApp support, and rapid callback services 365 days a year.</p>
             </div>
           </div>
         </div>
+      </section>
 
-        <p className="home-also" style={{marginLeft:'20px'}}>ALSO BUY</p>
-        <Grid
-          container
-          spacing={3}
-          style={{ width: "80%", alignItems: "left", textAlign: "left", marginLeft:'20px' }}
-        >
-          <Grid item xs="auto">
-            <Item style={{ textAlign: "left" }}>
-              <p className="home-te">
-                {" "}
-                <spam className="home-dot3"></spam> Investment
-              </p>
-              <p className="home-te1">LIC Plans</p>
-            </Item>
-          </Grid>
+      {/* Mobile App Download */}
+      <section className="safelife-app-section">
+        <div className="app-section-container">
+          <div className="app-text-content">
+            <div className="section-pill">SAFELIFE ON MOBILE</div>
+            <h2>Get the SafeLife Mobile App</h2>
+            <p className="app-sub">
+              Access your policies, book health checkups, track renewal dates, and file cashless claims with a single tap.
+            </p>
 
-          <Grid item xs="auto">
-            <Item style={{ textAlign: "left" }}>
-              <p className="home-te">
-                {" "}
-                <spam className="home-dot3"></spam> Term Life
-              </p>
-              <p className="home-te1">Return of Premium</p>
-            </Item>
-          </Grid>
-
-          <Grid item xs="auto">
-            <Item style={{ textAlign: "left" }}>
-              <p className="home-te">
-                {" "}
-                <spam className="home-dot3"></spam> Term Life
-              </p>
-              <p className="home-te1">Life Insurance for Housewives</p>
-            </Item>
-          </Grid>
-
-          <Grid item xs="auto">
-            <Item style={{ textAlign: "left" }}>
-              <p className="home-te" style={{ color: "#FF4D4F" }}>
-                {" "}
-                <spam
-                  className="home-dot3"
-                  style={{ backgroundColor: "#FF4D4F" }}
-                ></spam>{" "}
-                Health
-              </p>
-              <p className="home-te1">Corona Virus Health Insurance</p>
-            </Item>
-          </Grid>
-
-          <Grid item xs="auto">
-            <Item style={{ textAlign: "left" }}>
-              <p className="home-te" style={{ color: "#FF4D4F" }}>
-                {" "}
-                <spam
-                  className="home-dot3"
-                  style={{ backgroundColor: "#FF4D4F" }}
-                ></spam>{" "}
-                Health
-              </p>
-              <p className="home-te1">Arogya Sanjeevani</p>
-            </Item>
-          </Grid>
-
-          <Grid item xs="auto">
-            <Item style={{ textAlign: "left" }}>
-              <p className="home-te" style={{ color: "#FF4D4F" }}>
-                {" "}
-                <spam
-                  className="home-dot3"
-                  style={{ backgroundColor: "#FF4D4F" }}
-                ></spam>{" "}
-                Health
-              </p>
-              <p className="home-te1">1 Cr Health Insurance</p>
-            </Item>
-          </Grid>
-
-          <Grid item xs="auto">
-            <Item style={{ textAlign: "left" }}>
-              <p className="home-te">
-                {" "}
-                <spam className="home-dot3"></spam> Others
-              </p>
-              <p className="home-te1">pet Insurance</p>
-            </Item>
-          </Grid>
-        </Grid>
-      </div>
-      <br></br>
-      <br></br>
-      <br></br>
-
-      <div
-        style={{ backgroundColor: "#F0F6FF", cursor: "pointer", padding: "3%" }}
-      >
-        <div style={{ marginLeft: "5%", height: "100%", marginBottom: "2%" }}>
-          <Carousel
-            style={{ marginLeft: "5%", height: "100%", marginBottom: "2%" }}
-          />
-        </div>
-      </div>
-      <div>
-        <img style={{ float: "left" }} src={left} alt="left-bg" />
-        <p
-          style={{
-            position: "absolute",
-            marginTop: "8%",
-            fontSize: "36px",
-            marginLeft: "12%",
-            color: "#253858",
-          }}
-        >
-          What makes <br></br>
-          <b> Policybazaar</b> the<br></br>
-          <b> best place</b> to buy<br></br>
-          <b> insurance</b> in India?
-        </p>
-        <img style={{ float: "right" }} src={right} alt="left-bg" />
-
-        <div className="home-d1">
-          <div className="home-l" style={{ backgroundColor: "#0550C7" }}></div>
-          <img src={part} alt="party" />
-          <p>
-            <b
-              style={{
-                color: "#0550C7",
-                position: "absolute",
-                marginBottom: "13px",
-              }}
-            >
-              Over 9 million
-            </b>
-          </p>
-          <p className="home-d-text">
-            Customers trust us & have bought their insurance on Policy bazaar
-          </p>
-        </div>
-        <div className="home-d2">
-          <div className="home-l" style={{ backgroundColor: "#3AC2F3" }}></div>
-          <img src={sear1} alt="party" />
-          <p>
-            <b
-              style={{
-                color: "#3AC2F3",
-                position: "absolute",
-                marginBottom: "13px",
-              }}
-            >
-              50+ insurers
-            </b>
-          </p>
-          <p className="home-d-text">
-            partnered with us so that you can compare easily & transparentlyr
-          </p>
-        </div>
-        <div className="home-d3">
-          <div className="home-l" style={{ backgroundColor: "#57CD1D" }}></div>
-          <img src={sear2} alt="party" />
-          <p>
-            <b
-              style={{
-                color: "#57CD1D",
-                position: "absolute",
-                marginBottom: "13px",
-              }}
-            >
-              The Best Price
-            </b>
-          </p>
-          <p className="home-d-text">
-            for all insurance plans available online
-          </p>
-        </div>
-        <div className="home-d4">
-          <div className="home-l" style={{ backgroundColor: "#FFB62C" }}></div>
-          <img src={sear3} alt="party" />
-          <p>
-            <b
-              style={{
-                color: "#FFB62C",
-                position: "absolute",
-                marginBottom: "13px",
-              }}
-            >
-              Claims
-            </b>
-          </p>
-          <p className="home-d-text">
-            support built in with every policy for help, when you need it the
-            mostr
-          </p>
-        </div>
-      </div>
-      <div
-        style={{
-          marginTop: "45%",
-          marginLeft: "12%",
-          fontFamily:
-            "Roboto,-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif",
-        }}
-      >
-        <h1>PB Advantage</h1>
-        <div className="home-hl"></div>
-        <p className="home-hp">
-          When you buy insurance from us, you get more than just financial
-          safety. You also get: our promise of simplifying complex insurance
-          terms and conditions, quick stress-free claims, instant quotes from
-          top insurers and being present for you in the toughest of times.
-        </p>
-        <p
-          style={{ color: "#0663F6", fontWeight: "500", alignItems: "center" }}
-        >
-          Know more
-        </p>
-      </div>
-      <div style={{ width: "80%", marginLeft: "15%" }}>
-        <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid item xs={2.2}>
-            <Item
-              style={{ height: "200px", alignItems: "center" }}
-              className="home-de"
-            >
-              <img
-                style={{ marginLeft: "15%", marginTop: "15%" }}
-                src={Pri1}
-                alt="one"
-              />
-              <h4
-                style={{
-                  color: "black",
-                  fontSize: "20px",
-                  marginBottom: "0px",
-                }}
-              >
-                On best Prices
-              </h4>
-              <p style={{ marginTop: "0px" }}>Guaranteed</p>
-            </Item>
-          </Grid>
-          <Grid item xs={2.2}>
-            <Item
-              style={{ height: "200px", alignItems: "center" }}
-              className="home-de"
-            >
-              <img
-                style={{ marginLeft: "15%", marginTop: "15%" }}
-                src={Pri2}
-                alt="one"
-              />
-              <h4
-                style={{
-                  color: "black",
-                  fontSize: "20px",
-                  marginBottom: "0px",
-                }}
-              >
-                Unbiased Advice
-              </h4>
-              <p style={{ marginTop: "0px" }}>Keeping customers first.</p>
-            </Item>
-          </Grid>
-          <Grid item xs={2.2}>
-            <Item
-              style={{ height: "200px", alignItems: "center" }}
-              className="home-de"
-            >
-              <img
-                style={{ marginLeft: "15%", marginTop: "15%" }}
-                src={Pri3}
-                alt="one"
-              />
-              <h4
-                style={{
-                  color: "black",
-                  fontSize: "20px",
-                  marginBottom: "0px",
-                }}
-              >
-                100% Reliable
-              </h4>
-              <p style={{ marginTop: "0px" }}>Regulated by IRDAI</p>
-            </Item>
-          </Grid>
-          <Grid item xs={2.2}>
-            <Item
-              style={{ height: "200px", alignItems: "center" }}
-              className="home-de"
-            >
-              <img
-                style={{ marginLeft: "15%", marginTop: "15%" }}
-                src={Pri4}
-                alt="one"
-              />
-              <h4
-                style={{
-                  color: "black",
-                  fontSize: "20px",
-                  marginBottom: "0px",
-                }}
-              >
-                Claims Support
-              </h4>
-              <p style={{ marginTop: "0px" }}>Made Stress-free</p>
-            </Item>
-          </Grid>
-          <Grid item xs={2.2}>
-            <Item
-              style={{ height: "200px", alignItems: "center" }}
-              className="home-de"
-            >
-              <img
-                style={{ marginLeft: "15%", marginTop: "15%" }}
-                src={Pri5}
-                alt="one"
-              />
-              <h5
-                style={{
-                  color: "black",
-                  fontSize: "20px",
-                  marginBottom: "0px",
-                }}
-              >
-                Happy to Help
-              </h5>
-              <p style={{ marginTop: "0px" }}>Every day of the week</p>
-            </Item>
-          </Grid>
-        </Grid>
-      </div>
-      <div
-        style={{
-          backgroundColor: "#F0F6FF",
-          width: "100%",
-          height: "543px",
-          marginTop: "5%",
-        }}
-      >
-        <img
-          style={{ float: "right", marginRight: "15%", marginTop: "5%" }}
-          src={bigp}
-          alt="phone"
-        />
-        <div
-          style={{
-            marginLeft: "13%",
-            position: "absolute",
-            fontFamily:
-              "Roboto,-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif",
-          }}
-        >
-          <h1
-            style={{
-              fontWeight: "500",
-              fontFamily:
-                "Roboto,-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif",
-              lineHeight: "114%",
-            }}
-          >
-            Get the Policybazaar app
-          </h1>
-          <div className="home-hl"></div>
-          <p style={{ color: "#253858", fontSize: "18px" }}>
-            Get control of all your insurance needs anywhere, anytime
-          </p>
-
-          <p style={{ position: "absolute", top: "100%", left: "0%" }}>
-            {" "}
-            <img src={star} alt="star" /> Compare different insurance policies
-          </p>
-          <p style={{ position: "absolute", top: "130%", left: "0%" }}>
-            <img src={star} alt="star" /> Buy, store and share all your policies
-            online
-          </p>
-          <p style={{ position: "absolute", top: "160%", left: "0%" }}>
-            <img src={star} alt="star" /> Track your policy status on the go
-          </p>
-          <p style={{ position: "absolute", top: "190%", left: "0%" }}>
-            <img src={star} alt="star" /> Download your policy with a single tap
-          </p>
-          <p
-            style={{
-              position: "absolute",
-              top: "225%",
-              left: "0%",
-              color: "#253858",
-            }}
-          >
-            Download our app from
-          </p>
-          <div
-            style={{
-              position: "absolute",
-              top: "265%",
-              left: "0%",
-              display: "flex",
-              flexDirection: "row",
-            }}
-          >
-            <img src={Ap2} alt="app" style={{ marginRight: "7%" }} />
-
-            <img src={Ap1} alt="app" />
-          </div>
-        </div>
-      </div>
-      <div className="home-ma-pat">
-        <p className="home-pat">Our Partners</p>
-        <p className="home-pat1">Leading insurers for your financial freedom</p>
-        <div
-          style={{
-            width: "70%",
-            marginLeft: "15%",
-            marginRight: "15%",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            gap: "20px",
-          }}
-        >
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={o1} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={o2} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={o3} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={o4} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={o5} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={o6} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={o7} alt="one" />
-          </div>
-        </div>
-
-        <div
-          style={{
-            width: "70%",
-            marginLeft: "15%",
-            marginTop: "2%",
-            marginRight: "15%",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            gap: "20px",
-          }}
-        >
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={o8} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px", height: "40px" }} src={o9} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={o4} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={o5} alt="one" />
-          </div>
-
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={o6} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={o7} alt="one" />
-          </div>
-
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={o5} alt="one" />
-          </div>
-        </div>
-        <div
-          style={{
-            width: "70%",
-            marginLeft: "15%",
-            marginTop: "2%",
-            marginRight: "15%",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            gap: "20px",
-          }}
-        >
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k1} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px", height: "40px" }} src={k0} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k3} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k2} alt="one" />
-          </div>
-
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k8} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k3} alt="one" />
-          </div>
-
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k5} alt="one" />
-          </div>
-        </div>
-        <div
-          style={{
-            width: "70%",
-            marginLeft: "15%",
-            marginTop: "2%",
-            marginRight: "15%",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            gap: "20px",
-          }}
-        >
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k7} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px", height: "40px" }} src={k6} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k5} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k0} alt="one" />
-          </div>
-
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k3} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k8} alt="one" />
-          </div>
-
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k4} alt="one" />
-          </div>
-        </div>
-        <div
-          style={{
-            width: "70%",
-            marginLeft: "15%",
-            marginTop: "2%",
-            marginRight: "15%",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            gap: "20px",
-          }}
-        >
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k2} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px", height: "40px" }} src={o0} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={o4} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k1} alt="one" />
-          </div>
-
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k9} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k8} alt="one" />
-          </div>
-
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k4} alt="one" />
-          </div>
-        </div>
-        <div
-          style={{
-            width: "70%",
-            marginLeft: "15%",
-            marginTop: "2%",
-            marginRight: "15%",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            gap: "20px",
-          }}
-        >
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={o3} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px", height: "40px" }} src={k2} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k1} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={o5} alt="one" />
-          </div>
-
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={o6} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px", height: "40px" }} src={o9} alt="one" />
-          </div>
-
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={o0} alt="one" />
-          </div>
-        </div>
-        <div
-          style={{
-            width: "70%",
-            marginLeft: "15%",
-            marginTop: "2%",
-            marginRight: "15%",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            gap: "20px",
-          }}
-        >
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k7} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px", height: "40px" }} src={k6} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k5} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k0} alt="one" />
-          </div>
-
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k3} alt="one" />
-          </div>
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k8} alt="one" />
-          </div>
-
-          <div className="home-ob">
-            <img style={{ width: "90px" }} src={k4} alt="one" />
-          </div>
-        </div>
-      </div>
-
-      <div className="home-inv">
-        <div
-          style={{
-            marginLeft: "12%",
-            marginTop: "5%",
-            fontFamily:
-              "Roboto,-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif",
-          }}
-        >
-          <h1>Investors</h1>
-          <div className="home-hl"></div>
-
-          <br />
-          <br />
-
-          <div
-            className="marquee"
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              width: "90%",
-            }}
-          >
-            <div
-              style={{
-                width: "300px",
-                height: "100px",
-                backgroundColor: "white",
-                borderRadius: "4px",
-                paddingTop: "30px",
-                paddingLeft: "40px",
-                paddingRight: "40px",
-              }}
-            >
-              <img src={invest1} alt="inv" />
+            <div className="app-checklist">
+              <div className="app-check-item">
+                <FiCheckCircle color="#10b981" size={18} />
+                <span>Store and share all 17 partner policies digitally</span>
+              </div>
+              <div className="app-check-item">
+                <FiCheckCircle color="#10b981" size={18} />
+                <span>30-minute cashless claim tracking with real-time updates</span>
+              </div>
+              <div className="app-check-item">
+                <FiCheckCircle color="#10b981" size={18} />
+                <span>Instant policy document download in PDF format</span>
+              </div>
+              <div className="app-check-item">
+                <FiCheckCircle color="#10b981" size={18} />
+                <span>Automated renewal reminders to never lapse your safety</span>
+              </div>
             </div>
-            <div
-              style={{
-                width: "200px",
-                height: "100px",
-                backgroundColor: "white",
-                borderRadius: "4px",
-                paddingTop: "35px",
-                paddingLeft: "40px",
-                paddingRight: "40px",
-              }}
-            >
-              <img src={invest2} alt="inv" />
+
+            <div className="app-download-badges">
+              <img src={Ap2} alt="Get it on Google Play" className="store-badge" />
+              <img src={Ap1} alt="Download on Apple Store" className="store-badge" />
             </div>
-            <div
-              style={{
-                width: "200px",
-                height: "100px",
-                backgroundColor: "white",
-                borderRadius: "4px",
-                paddingTop: "30px",
-                paddingLeft: "40px",
-                paddingRight: "40px",
-              }}
-            >
-              <img src={invest1} alt="inv" />
+          </div>
+
+          <div className="app-image-content">
+            <img src={bigp} alt="SafeLife mobile app preview" className="app-mockup-img" />
+          </div>
+        </div>
+      </section>
+
+      {/* Official 17 Partner Directory */}
+      <section className="safelife-directory-section">
+        <div className="directory-container">
+          <div className="text-center mb-8">
+            <div className="section-pill">DIRECT AUTHORIZATION</div>
+            <h2 className="section-title">Official 17 Insurance Partners</h2>
+            <p className="section-subtitle">
+              Verify our direct partnerships across Life, Health, and General Insurance.
+            </p>
+          </div>
+
+          <div className="directory-grid">
+            {/* Life Category */}
+            <div className="directory-card dir-card-life">
+              <div className="dir-header">
+                <div className="icon-wrapper icon-wrapper-life"><FiUmbrella color="#2563eb" size={20} /></div>
+                <div>
+                  <h3>Life Insurance</h3>
+                  <span className="dir-count">6 Authorized Providers</span>
+                </div>
+              </div>
+              <ul className="dir-list">
+                {DEALT_PRODUCTS.life.items.map((ins) => (
+                  <li key={ins.id}>
+                    <Link to="/plans?category=life">
+                      <span className="dir-partner-name">{ins.name}</span>
+                      <span className="dir-badge dir-badge-life">{ins.highlight}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div
-              style={{
-                width: "200px",
-                height: "100px",
-                backgroundColor: "white",
-                borderRadius: "4px",
-                paddingTop: "35px",
-                paddingLeft: "40px",
-                paddingRight: "40px",
-              }}
-            >
-              <img src={invest2} alt="inv" />
+
+            {/* Health Category */}
+            <div className="directory-card dir-card-health">
+              <div className="dir-header">
+                <div className="icon-wrapper icon-wrapper-health"><FaHeartbeat color="#ef4444" size={20} /></div>
+                <div>
+                  <h3>Health Insurance</h3>
+                  <span className="dir-count">5 Authorized Providers</span>
+                </div>
+              </div>
+              <ul className="dir-list">
+                {DEALT_PRODUCTS.health.items.map((ins) => (
+                  <li key={ins.id}>
+                    <Link to="/plans?category=health">
+                      <span className="dir-partner-name">{ins.name}</span>
+                      <span className="dir-badge dir-badge-health">{ins.highlight}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div
-              style={{
-                width: "200px",
-                height: "100px",
-                backgroundColor: "white",
-                borderRadius: "4px",
-                paddingTop: "35px",
-                paddingLeft: "40px",
-                paddingRight: "40px",
-              }}
-            >
-              <img src={invest2} alt="inv" />
+
+            {/* General Category */}
+            <div className="directory-card dir-card-general">
+              <div className="dir-header">
+                <div className="icon-wrapper icon-wrapper-general"><AiTwotoneInsurance color="#059669" size={20} /></div>
+                <div>
+                  <h3>General Insurance Co. Ltd</h3>
+                  <span className="dir-count">6 Authorized Providers</span>
+                </div>
+              </div>
+              <ul className="dir-list">
+                {DEALT_PRODUCTS.general.items.map((ins) => (
+                  <li key={ins.id}>
+                    <Link to="/plans?category=general">
+                      <span className="dir-partner-name">{ins.name}</span>
+                      <span className="dir-badge dir-badge-general">{ins.highlight}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
-      </div>
-    </>
+      </section>
+
+      {/* Institutional Investors & Trust */}
+      <section className="safelife-investors-section">
+        <div className="investors-container">
+          <h3 className="investors-title">Backed by Leading Financial Institutions</h3>
+          <div className="investors-logos">
+            <div className="inv-logo-card"><img src={invest1} alt="Partner Investor" /></div>
+            <div className="inv-logo-card"><img src={invest2} alt="Partner Investor" /></div>
+            <div className="inv-logo-card"><img src={invest1} alt="Partner Investor" /></div>
+            <div className="inv-logo-card"><img src={invest2} alt="Partner Investor" /></div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 

@@ -1,26 +1,76 @@
-.gender{
-    display: flex;
-    gap: 30px;
+/* SafeLife Wizard Step 4 Styles */
+.gender-toggle-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
 }
-.gender>button{
-    width: 70px;
+
+.gender-option-btn {
+  padding: 12px;
+  border-radius: 12px;
+  border: 1.5px solid #e2e8f0;
+  background: #ffffff;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.page4_display{
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-   gap: 40px;
-   margin: 20px;
+
+.gender-option-btn:hover {
+  background: #f8fafc;
 }
-.page4_display>fieldset{
-   display: grid;
-   
+
+.gender-option-btn.active {
+  border-color: #ef4444;
+  background: #fef2f2;
+  color: #b91c1c;
 }
-.page4_display+div{
-    display: grid;
-    justify-content: center;
+
+.contact-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
 }
-.page4_display+div>button{
-    width: 100%;
-    height: 40px;
-    border-radius: 10px;
+
+.contact-field-group label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #334155;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.contact-field-group input {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid #cbd5e1;
+  font-size: 14.5px;
+  color: #0f172a;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.contact-field-group input:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+
+.security-reassurance-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #065f46;
+  font-weight: 500;
+  margin-top: 8px;
 }

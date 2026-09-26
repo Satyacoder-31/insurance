@@ -1,441 +1,1161 @@
-.home-main {
-  margin-left: 13%;
+/* SafeLife Modern Homepage Styles */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap');
+
+.safelife-home-page {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  color: #1e293b;
+  background-color: #ffffff;
+  overflow-x: hidden;
 }
 
-.home-head {
-  font-size: 36px;
-
-  color: #253858;
-  line-height: 56px;
-  letter-spacing: -1px;
-  font-weight: 300;
+/* ==========================================================================
+   1. HERO SECTION
+   ========================================================================== */
+.safelife-hero-section {
+  background: radial-gradient(circle at 10% 20%, rgba(239, 246, 255, 0.8) 0%, rgba(255, 255, 255, 1) 70%),
+              radial-gradient(circle at 90% 10%, rgba(240, 253, 250, 0.6) 0%, transparent 60%);
+  padding: 50px 24px 60px 24px;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
 }
 
-.home-cont1 {
-  color: #776bfd;
-  font-size: 14px;
-  width: 150px;
-  margin-left: 42px;
-  top: 230px;
-  position: absolute;
+.safelife-hero-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 50px;
+  align-items: center;
 }
 
-.home-cont2 {
-  color: #ff9b2c;
-  font-size: 14px;
-  width: 150px;
-  margin-left: 230px;
-  top: 230px;
-  position: absolute;
-}
-.home-img0{
-  margin-top: 45px;
-  margin-right: 10px;
-}
-.home-img {
-  position: absolute;
-  left: 390px;
-  top: 245px;
-  margin-left: 30px;
-}
-.home-img2 {
-  top: 90px;
-  left: 800px;
-  position: absolute;
-  height: 233.15px;
-  width: 430px;
-}
-.home-pro {
-  font-size: 22px;
-  color: #253858;
-  font-style: medium;
-  font-weight: 600;
-  margin-top: 0%;
-  line-height: 30px;
-  margin-bottom: 0%;
-}
-.home-dat {
-  font-size: 28px;
-  line-height: 40px;
-  line-height: 122%;
-  color: #253858;
-  font-weight: 350;
-  width: 240px;
-  margin-top: 0px;
-}
-.home-kno {
-  background-color: #0663f6;
-  width: 120px;
-  height: 40px;
-  border-radius: 5px;
-  color: white;
-  border: none;
-  font-size: 16px;
-  font-weight: 500;
-}
-.home-da {
-  position: absolute;
-  left: 1025px;
-  top: 135px;
-}
-.home-maind {
-  position: absolute;
-  width: 80%;
-  height: 50%;
-  margin-top: 6%;
-  left: 5%;
+.safelife-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 18px;
 }
 
-.home-tol {
-  margin-right: 15px;
-  margin-bottom: 15px;
-  margin-top: 15px;
-  width: 118px;
-  height: 75px;
-  padding: 1%;
-  text-align: center;
+.safelife-badge-pill .badge-icon {
+  color: #2563eb;
+}
 
-  float: right;
-  border-radius: 5px;
-  background-color: #F2F7FF;
-  /* box-shadow: #a8bde0 0px 0px 20px -5px, #aebdd6 0px 10px 10px -5px; */
+.safelife-hero-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #0f172a;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.5px;
 }
-.home-tol:hover {
-  box-shadow: rgb(141, 175, 211) 0px 20px 30px -10px;
-  cursor: pointer;
+
+.hero-gradient-text {
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #0284c7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.home-tms:hover {
-  box-shadow: rgb(128, 156, 185) 0px 20px 30px -10px;
-  cursor: pointer;
+
+.safelife-hero-desc {
+  font-size: 16.5px;
+  color: #475569;
+  line-height: 1.6;
+  max-width: 620px;
+  margin: 0 0 24px 0;
 }
-.home-dot {
-  height: 8px;
-  width: 8px;
-  background-color: #0663f6;
-  border-radius: 50%;
-  display: inline-block;
+
+.safelife-hero-chips {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
 }
-.home-dot1 {
-  height: 8px;
-  width: 8px;
-  background-color: #b404fd;
-  border-radius: 50%;
-  display: inline-block;
-}
-.home-tm {
-  width: 86px;
-  font-size: 12px;
-  font-weight: 400;
-  color: #253858;
-  margin-top: 0%;
-  margin-left: 15%;
-}
-.home-tm1 {
-  color: black;
-  font-size: 12px;
-  position: absolute;
-  margin-top: 1.5%;
-  text-align: center;
-}
-.home-tm1-5 {
-  color: #0663f6;
-  font-size: 10px;
-  position: absolute;
-  margin-top: 2%;
-}
-.home-tmc {
-  color: #b404fd;
-  font-size: 10px;
-  position: absolute;
-  margin-left: 3%;
-}
-.home-tms {
-  margin-right: 10px;
-  margin-bottom: 15px;
-  margin-top: 15px;
-  width: 123px;
-  height: 75px;
-  padding: 1%;
-  text-align: center;
-  box-shadow: #eaedf3 0px 0px 20px -5px, #dadfe6 0px 10px 10px -5px;
-  float: right;
-  border-radius: 5px;
-}
-.home-also {
-  margin-top: 30%;
-  color: #0663f6;
+
+.hero-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  padding: 8px 14px;
+  border-radius: 20px;
   font-size: 13px;
   font-weight: 600;
-}
-.home-te {
-  font-size: 12px;
-  color: #998dd9;
-  font-family: Roboto, -apple-system, system-ui, BlinkMacSystemFont, Segoe UI,
-    Helvetica Neue, Arial, sans-serif;
-  margin-bottom: 0px;
-}
-.home-te1 {
-  font-size: 12px;
-  margin-top: 0px;
-  font-family: Roboto, -apple-system, system-ui, BlinkMacSystemFont, Segoe UI,
-    Helvetica Neue, Arial, sans-serif;
+  color: #334155;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
 }
 
-.home-dot3 {
-  height: 5px;
-  width: 5px;
-  background-color: #998dd9;
+/* Interactive Search Bar in Hero */
+.safelife-hero-search {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 2px solid #cbd5e1;
+  border-radius: 14px;
+  padding: 6px 14px;
+  max-width: 580px;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+  transition: all 0.2s ease;
+}
+
+.safelife-hero-search:focus-within {
+  border-color: #2563eb;
+  box-shadow: 0 12px 30px -5px rgba(37, 99, 235, 0.18);
+}
+
+.safelife-hero-search .search-icon {
+  color: #94a3b8;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.safelife-hero-search input {
+  border: none;
+  outline: none;
+  font-size: 15px;
+  color: #0f172a;
+  width: 100%;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.safelife-hero-search input::placeholder {
+  color: #94a3b8;
+}
+
+.clear-search-btn {
+  background: #f1f5f9;
+  border: none;
   border-radius: 50%;
-  display: inline-block;
-  margin-bottom: 1.5%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #64748b;
+  font-size: 12px;
+  transition: all 0.2s;
 }
-.home-d1 {
-  width: 200px;
-  height: 180px;
-  position: absolute;
-  margin-left: 53%;
-  margin-top: 4%;
-  padding: 25px;
-  border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-}
-.home-d2 {
-  width: 200px;
-  height: 180px;
 
-  position: absolute;
-  margin-left: 72%;
-  margin-top: 6%;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+.clear-search-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
 }
-.home-d3 {
-  width: 200px;
-  height: 180px;
-  position: absolute;
-  margin-left: 56%;
-  margin-top: 23%;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+/* Hero CTA Card */
+.safelife-hero-card-col {
+  display: flex;
+  justify-content: flex-end;
 }
-.home-d4 {
-  width: 200px;
-  height: 180px;
-  position: absolute;
-  margin-left: 74%;
-  margin-top: 25%;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+.safelife-hero-cta-card {
+  background: linear-gradient(145deg, #1e3a8a 0%, #1d4ed8 60%, #2563eb 100%);
+  color: #ffffff;
+  border-radius: 24px;
+  padding: 36px 32px;
+  box-shadow: 0 25px 40px -12px rgba(29, 78, 216, 0.4);
+  position: relative;
+  overflow: hidden;
+  max-width: 400px;
+  width: 100%;
 }
-.home-d-text {
-  width: 176px;
-  height: 84px;
-  font-family: Roboto, -apple-system, system-ui, BlinkMacSystemFont, Segoe UI,
-    Helvetica Neue, Arial, sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  color: #253858;
-  margin-top: 55px;
-}
-.home-l {
+
+.safelife-hero-cta-card::after {
   content: "";
   position: absolute;
-  margin-left: -10px;
-  top: 0;
-  height: 100%;
-  width: 4px;
-  background: #2d3cd9;
-  border-radius: 5px;
+  top: -50px;
+  right: -50px;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+  border-radius: 50%;
 }
-.home-hl {
-  background: #0065ff;
-  width: 100px;
-  height: 4px;
-  margin: 20px 0 0;
+
+.card-top-tag {
+  display: inline-block;
+  background: #fbbf24;
+  color: #78350f;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 14px;
+}
+
+.safelife-hero-cta-card h3 {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0 0 10px 0;
+  line-height: 1.3;
+}
+
+.safelife-hero-cta-card p {
+  font-size: 13.5px;
+  opacity: 0.9;
+  line-height: 1.55;
+  margin: 0 0 22px 0;
+}
+
+.cta-card-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 22px;
+  text-align: center;
+}
+
+.cta-card-stats h4 {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0 0 2px 0;
+}
+
+.cta-card-stats span {
+  font-size: 10.5px;
+  opacity: 0.85;
+  font-weight: 600;
   display: block;
 }
-.home-hp {
-  width: 580px;
-  color: #253858;
-  font-family: Roboto, -apple-system, system-ui, BlinkMacSystemFont, Segoe UI,
-    Helvetica Neue, Arial, sans-serif;
-}
-.home-de:hover {
-  transform: scale(1.2);
-  box-shadow: rgba(246, 36, 89, 1) 0px 5px 15px;
-}
-.home-de:hover h5 {
+
+.cta-primary-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  color: #1d4ed8;
+  padding: 13px 24px;
+  border-radius: 12px;
   font-weight: 700;
-}
-.home-pat {
-  text-align: center;
-  font-family: Roboto, -apple-system, system-ui, BlinkMacSystemFont, Segoe UI,
-    Helvetica Neue, Arial, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 30px;
-  line-height: 56px;
-  text-align: center;
-  letter-spacing: -1px;
-  color: #010a19;
-  margin-bottom: 0%;
-}
-.home-ma-pat {
-  width: 96%;
-  margin-bottom: 2%;
-  padding: 2%;
-  background: #f0f6ff;
-}
-.home-pat1 {
-  font-family: Roboto, -apple-system, system-ui, BlinkMacSystemFont, Segoe UI,
-    Helvetica Neue, Arial, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  margin-top: 0%;
-  /* identical to box height, or 200% */
-  color: rgba(0, 0, 0, 0.36);
-  text-align: center;
-}
-.home-ob {
-  width: 120px;
-  height: 55px;
-  background-color: white;
-  padding-left: 10px;
-  padding-top: 10px;
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-  filter: rgb(192, 183, 183);
-  -webkit-filter: grayscale(1);
+  font-size: 14.5px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
 }
 
-.home-ob:hover {
-  filter: none;
-  -webkit-filter: grayscale(0);
+.cta-primary-btn:hover {
+  background: #f8fafc;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
-.home-inv {
-  width: 100%;
-  background: rgba(0, 0, 0, 0.04);
-  height: 270px;
-  margin-bottom: 5%;
+
+/* ==========================================================================
+   2. STATS STRIP
+   ========================================================================== */
+.safelife-stats-strip {
+  background: #0f172a;
+  color: #ffffff;
+  padding: 24px 20px;
 }
-.marquee {
-  background-color: #ddd;
-  width: 500px;
+
+.safelife-stats-grid {
+  max-width: 1240px;
   margin: 0 auto;
-  overflow: hidden;
-  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
 }
-.marquee div {
-  display: inline-block;
-  font-size: 20px;
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stat-number {
+  font-family: 'Outfit', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: #ffffff;
+  background: linear-space;
+}
+
+.stat-label {
+  font-size: 12.5px;
+  color: #94a3b8;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ==========================================================================
+   3. PRODUCTS SECTION
+   ========================================================================== */
+.safelife-products-section {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 60px 24px 80px 24px;
+}
+
+.safelife-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.section-pill {
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #2563eb;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.section-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+}
+
+.section-subtitle {
+  font-size: 15px;
+  color: #64748b;
+  max-width: 620px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Category Tabs */
+.safelife-category-tabs {
+  display: flex;
+  background: #f1f5f9;
+  padding: 5px;
+  border-radius: 14px;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: none;
+  background: transparent;
+  color: #475569;
+  font-size: 13.5px;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: #0f172a;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.tab-btn.active {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.tab-btn.tab-life.active {
+  color: #1d4ed8;
+  background: #eff6ff;
+}
+
+.tab-btn.tab-health.active {
+  color: #dc2626;
+  background: #fef2f2;
+}
+
+.tab-btn.tab-general.active {
+  color: #047857;
+  background: #ecfdf5;
+}
+
+.tab-count {
+  font-size: 11px;
+  font-weight: 800;
+  background: rgba(0, 0, 0, 0.08);
+  padding: 2px 7px;
+  border-radius: 10px;
+}
+
+.tab-btn.active .tab-count {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.search-status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  padding: 10px 18px;
+  border-radius: 10px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  color: #1e40af;
+}
+
+.search-status-bar button {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Product Cards Grid */
+.safelife-product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+.safelife-product-card {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #e2e8f0;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
-  left: 100%;
-  animation: marquee 8s linear infinite;
-}
-.marquee:hover div {
-  animation-play-state: paused;
 }
 
-.marquee div:nth-child(1) {
-  animation-delay: 0s;
-}
-.marquee div:nth-child(2) {
-  animation-delay: 0.8s;
-}
-.marquee div:nth-child(3) {
-  animation-delay: 1.6s;
-}
-.marquee div:nth-child(4) {
-  animation-delay: 2.4s;
-}
-.marquee div:nth-child(5) {
-  animation-delay: 3.2s;
+.safelife-product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 30px -6px rgba(15, 23, 42, 0.1);
 }
 
-@keyframes marquee {
-  0% {
-    left: 100%;
-  }
-  100% {
-    left: -100%;
-  }
+.card-life:hover {
+  border-color: #93c5fd;
 }
 
-.home-hover-div {
-  position: absolute;
-  width: 1136px;
-  height: 728px;
-  background: #f1f1f1;
-  border-radius: 0px 0px 6px 6px;
-  display: none;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+.card-health:hover {
+  border-color: #fca5a5;
 }
 
-/* footer css */
+.card-general:hover {
+  border-color: #6ee7b7;
+}
 
-.footer {
+.card-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.category-badge {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 10px;
+  border-radius: 8px;
+}
+
+.badge-life {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.badge-health {
+  background: #fef2f2;
+  color: #ef4444;
+}
+
+.badge-general {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.card-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #475569;
+  background: #f8fafc;
+  padding: 3px 9px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.card-header-main {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.partner-monogram {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.monogram-life {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  color: #1e40af;
+}
+
+.monogram-health {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  color: #991b1b;
+}
+
+.monogram-general {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  color: #065f46;
+}
+
+.partner-name {
+  font-size: 17px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+  line-height: 1.25;
+}
+
+.highlight-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #059669;
+}
+
+.card-sub-desc {
+  font-size: 13.5px;
+  color: #64748b;
+  line-height: 1.45;
+  margin: 0 0 16px 0;
+}
+
+.card-coverage-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  border: 1px solid #f1f5f9;
+}
+
+.cov-label {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 600;
+  display: block;
+}
+
+.cov-value {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.cov-price {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #2563eb;
+}
+
+.card-feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+.card-feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12.5px;
+  color: #475569;
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+.feat-check {
+  color: #10b981;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.card-footer-actions {
+  margin-top: auto;
+}
+
+.btn-card-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   width: 100%;
-  background-color: black;
-  color: white;
-  font-family: Roboto, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
-    "Helvetica Neue", Arial, sans-serif;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
 }
-.footer-h1 {
-  position: absolute;
-  width: 159px;
-  height: 30px;
-  margin-left: 13%;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 30px;
+
+.btn-life {
+  background: #2563eb;
   color: #ffffff;
 }
-.footer-f {
-  margin-left: 8%;
-}
-.footer-f > div {
-  float: left;
-  margin-left: 5%;
-  margin-top: 5%;
-}
-.footer-hov:hover {
-  text-decoration: underline;
-  cursor: pointer;
-}
-.footer-boro {
-  background: rgba(168, 168, 168, 0.15);
-  width: 100%;
-  height: 70px;
-}
-.footer-bor {
-  width: 80%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 1px;
-  margin-left: 95px;
-  margin-right: 15px;
-}
-.footer-logo {
-  filter: gray;
-  -webkit-filter: grayscale(1);
-  width: 40px;
-  height: 40px;
-  margin-top: 0.8%;
-}
-.footer-logo:hover {
-  filter: none;
-  -webkit-filter: grayscale(0);
+
+.btn-life:hover {
+  background: #1d4ed8;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 }
 
-.react-multi-carousel-dot-list {
-  top: 90%;
-  bottom: -20px;
+.btn-health {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+.btn-health:hover {
+  background: #dc2626;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.btn-general {
+  background: #059669;
+  color: #ffffff;
+}
+
+.btn-general:hover {
+  background: #047857;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+}
+
+.no-products-found {
+  text-align: center;
+  padding: 60px 20px;
+  background: #f8fafc;
+  border-radius: 16px;
+  border: 1px dashed #cbd5e1;
+}
+
+.no-products-found h3 {
+  font-size: 20px;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+}
+
+.no-products-found p {
+  color: #64748b;
+  margin: 0 0 16px 0;
+}
+
+.btn-reset-search {
+  padding: 10px 22px;
+  border-radius: 10px;
+  background: #0f172a;
+  color: #ffffff;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   4. CAROUSEL SECTION
+   ========================================================================== */
+.safelife-carousel-section {
+  background: #f8fafc;
+  padding: 60px 24px;
+  border-top: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.carousel-section-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mb-8 {
+  margin-bottom: 32px;
+}
+
+/* ==========================================================================
+   5. WHY CHOOSE SAFELIFE SECTION
+   ========================================================================== */
+.safelife-why-section {
+  padding: 80px 24px;
+  background: #ffffff;
+}
+
+.why-section-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.why-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 50px auto;
+}
+
+.why-header h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 34px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 8px 0 12px 0;
+}
+
+.why-header p {
+  font-size: 16px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.why-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.why-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.why-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 36px -6px rgba(15, 23, 42, 0.1);
+}
+
+.pillar-blue {
+  border-top: 4px solid #2563eb;
+}
+
+.pillar-cyan {
+  border-top: 4px solid #0284c7;
+}
+
+.pillar-green {
+  border-top: 4px solid #10b981;
+}
+
+.pillar-amber {
+  border-top: 4px solid #f59e0b;
+}
+
+.why-icon-box {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.why-icon-box img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.why-card-metric {
+  font-family: 'Outfit', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0 0 6px 0;
+}
+
+.pillar-blue .why-card-metric { color: #2563eb; }
+.pillar-cyan .why-card-metric { color: #0284c7; }
+.pillar-green .why-card-metric { color: #059669; }
+.pillar-amber .why-card-metric { color: #d97706; }
+
+.why-card h4 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 10px 0;
+}
+
+.why-card p {
+  font-size: 13.5px;
+  color: #64748b;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ==========================================================================
+   6. SAFELIFE ADVANTAGE
+   ========================================================================== */
+.safelife-advantage-section {
+  padding: 70px 24px;
+  background: #f8fafc;
+}
+
+.advantage-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.advantage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.advantage-card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  padding: 28px 20px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  transition: all 0.2s ease;
+}
+
+.advantage-card:hover {
+  transform: translateY(-4px);
+  border-color: #cbd5e1;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+}
+
+.adv-img-box {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 16px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.adv-img-box img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.advantage-card h4 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+}
+
+.advantage-card p {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ==========================================================================
+   7. MOBILE APP SECTION
+   ========================================================================== */
+.safelife-app-section {
+  padding: 80px 24px;
+  background: radial-gradient(circle at 10% 20%, #eff6ff 0%, #ffffff 80%);
+}
+
+.app-section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.app-text-content h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 34px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 8px 0 12px 0;
+}
+
+.app-sub {
+  font-size: 16px;
+  color: #64748b;
+  margin: 0 0 24px 0;
+  line-height: 1.55;
+}
+
+.app-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.app-check-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #334155;
+  font-weight: 500;
+}
+
+.app-download-badges {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.store-badge {
+  height: 44px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.store-badge:hover {
+  transform: translateY(-2px);
+}
+
+.app-image-content {
+  text-align: center;
+}
+
+.app-mockup-img {
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.1));
+}
+
+/* ==========================================================================
+   8. DIRECTORY SECTION (17 PARTNERS)
+   ========================================================================== */
+.safelife-directory-section {
+  padding: 70px 24px;
+  background: #ffffff;
+}
+
+.directory-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.directory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.directory-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 28px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+}
+
+.dir-card-life { border-top: 4px solid #2563eb; }
+.dir-card-health { border-top: 4px solid #ef4444; }
+.dir-card-general { border-top: 4px solid #059669; }
+
+.dir-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.dir-header h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+.dir-count {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.dir-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dir-list li {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.dir-list li:last-child {
+  border-bottom: none;
+}
+
+.dir-list a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 6px;
+  text-decoration: none;
+  transition: all 0.18s ease;
+  border-radius: 8px;
+}
+
+.dir-list a:hover {
+  background: #f8fafc;
+  padding-left: 10px;
+}
+
+.dir-partner-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.dir-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.dir-badge-life { background: #eff6ff; color: #2563eb; }
+.dir-badge-health { background: #fef2f2; color: #ef4444; }
+.dir-badge-general { background: #ecfdf5; color: #059669; }
+
+/* ==========================================================================
+   9. INVESTORS SECTION
+   ========================================================================== */
+.safelife-investors-section {
+  padding: 50px 24px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+.investors-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.investors-title {
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #64748b;
+  margin: 0 0 28px 0;
+}
+
+.investors-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.inv-logo-card {
+  background: #ffffff;
+  padding: 16px 28px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+
+.inv-logo-card img {
+  height: 38px;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.75;
+  transition: all 0.2s;
+}
+
+.inv-logo-card:hover img {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   RESPONSIVENESS
+   ========================================================================== */
+@media screen and (max-width: 1024px) {
+  .safelife-hero-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .safelife-hero-card-col {
+    justify-content: center;
+  }
+  .app-section-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .app-checklist {
+    align-items: center;
+  }
+  .app-download-badges {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .safelife-hero-title {
+    font-size: 34px;
+  }
+  .section-title {
+    font-size: 26px;
+  }
+  .safelife-stats-grid {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .stat-divider {
+    display: none;
+  }
+  .safelife-product-grid {
+    grid-template-columns: 1fr;
+  }
 }

@@ -10,7 +10,6 @@ export const loginAction = (userData, dispatch) => {
 export const logoutAction = (dispatch) => {
   sessionStorage.removeItem("loggedInUserInfo");
   dispatch({
-    type: LOGIN,
-    payload: "",
+    type: LOGOUT,
   });
-}
+};

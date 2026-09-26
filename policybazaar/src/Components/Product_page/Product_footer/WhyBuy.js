@@ -7,7 +7,7 @@ let arr = [
     {
         image:premium,
         title:"Platinum insurance partner",
-        body:"Policybazaar is the largest partner for most Health Insurers and a Platinum partner, which means we prioritize your policy and claims to ensure treating them on priority"
+        body:"SafeLife is the largest partner for most Health Insurers and a Platinum partner, which means we prioritize your policy and claims to ensure treating them on priority"
     },
     {
         image:offordable,
@@ -23,7 +23,7 @@ let arr = [
 export const WhyBuy = () => {
   return (
     <div className='footer1' >
-        <h1>Why buy from Policybazaar?</h1>
+        <h1>Why buy from SafeLife?</h1>
         <div>
         {arr.map((e)=>(<Product_buy arr={e} />))}
         </div>

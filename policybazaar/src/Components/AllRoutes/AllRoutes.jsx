@@ -5,65 +5,51 @@ import Login from "../Login/LoginComp/Login";
 import Data from "../Navbar/Data";
 import { ChakraProvider } from "@chakra-ui/react";
 import HomePage from "../Home/Home";
+import { Family } from "../Product_page/Family_page/Family";
+import { Family_right } from "../Product_page/Family_page/Family_right";
+import { Page2 } from "../Product_page/Page_2/Page2";
+import { Page3 } from "../Product_page/Page_3/Page3";
+import { Page4 } from "../Product_page/Page_4/Page4";
+import { Display_data } from "../Product_page/data/Display_data";
+import { Product } from "../Product_page/Insurance_page/Product";
+import Payment from "../Payment/Payment";
 
 const AllRoutes = () => {
   return (
     <div>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/lifeinsurance">
-          <Route path="term-insurance">
-            {Data.TermInsurance.map((ele) => {
-              return <Route path={ele.path} />;
-            })}
-          </Route>
-          <Route path="other-insurance">
-            {Data.OtherInsurance.map((ele) => {
-              return <Route path={ele.path} />;
-            })}
-          </Route>
-          <Route path="investment-plans">
-            {Data.InvestmentPlans.map((ele) => {
-              return <Route path={ele.path} />;
-            })}
-          </Route>
-          <Route path="health-insurance">
-            {Data.HealthInsurance.map((ele) => {
-              return <Route path={ele.path} />;
-            })}
-          </Route>
-          <Route path="car-insurance">
-            {Data.CarInsurance.map((ele) => {
-              return <Route path={ele.path} />;
-            })}
-          </Route>
-        </Route>
-        <Route path="/renewal">
-          <Route path="life-renewal" />
-          <Route path="health-renewal" />
-          <Route path="motor-renewal" />
-          <Route path="two-wheeler-renewal" />
-        </Route>
-        <Route path="/claim">
-          <Route path="new-claim" />
-          <Route path="already-filed-claim" />
-          <Route path="filing-claim" />
-          <Route path="track-exising-claim" />
-        </Route>
-        <Route path="/support">
-          <Route path="account">
-            <Route path="policies" />
-            <Route path="get-help" />
-            <Route path="communication-preferences" />
-            <Route path="advisor" />
-          </Route>
-          <Route path="contact">
-            <Route path="whatsapp" />
-            <Route path="stores" />
-            <Route path="callback" />
-          </Route>
+        
+        {/* Health Insurance Flow */}
+        <Route path="/health" element={<Family />}>
+          <Route index element={<Family_right />} />
+          <Route path="health" element={<Family_right />} />
+          <Route path="age" element={<Page2 />} />
+          <Route path="pincode" element={<Page3 />} />
+          <Route path="contact" element={<Page4 />} />
         </Route>
 
+        {/* Life Insurance & Term Flow */}
+        <Route path="/plans" element={<Display_data />} />
+        <Route path="/term" element={<Product />} />
+
+        {/* Dynamic routes for dealt insurance providers */}
+        {Data.LifeInsurance.map((ele, i) => (
+          <Route key={`life-${i}`} path={`/lifeinsurance/${ele.path}`} element={<Display_data />} />
+        ))}
+        {Data.HealthInsurance.map((ele, i) => (
+          <Route key={`health-${i}`} path={`/healthinsurance/${ele.path}`} element={<Family />} />
+        ))}
+        {Data.GeneralInsurance.map((ele, i) => (
+          <Route key={`gen-${i}`} path={`/generalinsurance/${ele.path}`} element={<Product />} />
+        ))}
+
+        {/* Checkout, OTP & Payment */}
+        <Route path="/checkout" element={<FinalCheckout />} />
+        <Route path="/otp" element={<OTP />} />
+        <Route path="/payment" element={<Payment />} />
+
+        {/* Login */}
         <Route
           path="/login"
           element={
@@ -71,11 +57,10 @@ const AllRoutes = () => {
               <Login />
             </ChakraProvider>
           }
-        ></Route>
-        <Route path="checkout" element={<FinalCheckout />} />
-        <Route path="otp" element={<OTP></OTP>} />
+        />
       </Routes>
     </div>
   );
 };
+
 export default AllRoutes;

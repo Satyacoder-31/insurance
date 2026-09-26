@@ -10,10 +10,10 @@ export const LeftSide = () => {
         <img className='rating' src={rating_family_insurance} alt="rating"/>
         <div className='ratings'>
             <div><h1>58.9 <span>million</span></h1><p>Registered Consumers</p></div>
-            <div><h1>51</h1><p>Insurance Partners</p></div>
+            <div><h1>17</h1><p>Authorized Insurers</p></div>
             <div><h1>24.6<span>million</span></h1><p>Policies Sold</p></div>
         </div>  
-        <p>Policybazaar is one of India's largest digital insurance marketplaces</p>
+        <p className="leftside-trust-note">🛡️ SafeLife is an official digital insurance marketplace authorized across 17 premier partners</p>
     </div>
   )
 }

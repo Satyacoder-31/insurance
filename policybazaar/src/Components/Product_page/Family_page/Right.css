@@ -1,57 +1,185 @@
-.rightside_2>h1:first-child{
-  font-size: x-large;
-  font-style: italic;
-  color: rgb(54, 54, 54);
-  
+/* SafeLife Family Rightside Member Select Styles */
+.family-right-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 30px;
 }
-.rightside_2>h1:nth-child(2){
-    font-size: x-large;
-    font-weight: 500;
-    margin-top: -20px;
-  }
-  .rightside_2>form>h3{
-    font-size: medium;
-    font-weight: 500;
-    color: rgb(54, 54, 54);
-  }
-  .rightside_2>form>div{
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 30px;
-  }
-  .rightside_2>form>div>fieldset{
-    display: flex;
-    justify-content: space-around;
-    height: 40px;
 
-  }
-  .rightside_2>form>div>fieldset>div{
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .rightside_2{
-    padding-top: 50px;
-    padding-right: 100px;
-  }
-  input{
-    width: 20px;
-    height: 30px;
-  }
-.continue{
-    width: 50%;
-    height: 40px;
-    border-radius: 10px;
-    margin-top: 20px;
-    background-color: rgb(247, 98, 43);
-    font-size: large;
-    font-weight: 800;
-    font-style: italic;
+.family-form-card {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
+  padding: 36px 32px;
+  max-width: 500px;
+  width: 100%;
 }
-.continue+p{
-    font-size: small;
+
+.family-header-box {
+  margin-bottom: 24px;
 }
-.cont{
-    display: grid;
-    justify-items: center;
+
+.family-form-tag {
+  display: inline-block;
+  background: #fef2f2;
+  color: #ef4444;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 10px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.family-header-box h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+}
+
+.family-discount-text {
+  font-size: 13.5px;
+  color: #059669;
+  font-weight: 600;
+  margin: 0;
+}
+
+.members-select-section {
+  margin-bottom: 24px;
+}
+
+.section-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.member-card {
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: #ffffff;
+  transition: all 0.2s ease;
+  position: relative;
+  user-select: none;
+}
+
+.member-card:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.member-card.active {
+  border-color: #ef4444;
+  background: #fff5f5;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.12);
+}
+
+.member-avatar {
+  font-size: 26px;
+  margin-bottom: 6px;
+}
+
+.member-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.member-card.active .member-name {
+  color: #dc2626;
+}
+
+.member-check-icon {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ef4444;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.family-actions-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn-family-continue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background: #ef4444;
+  color: #ffffff;
+  padding: 13px;
+  border-radius: 12px;
+  border: none;
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.btn-family-continue:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
+}
+
+.btn-family-direct-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: #f8fafc;
+  color: #2563eb;
+  padding: 11px;
+  border-radius: 12px;
+  border: 1.5px solid #bfdbfe;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+
+.btn-family-direct-view:hover {
+  background: #eff6ff;
+  border-color: #2563eb;
+  transform: translateY(-1px);
+}
+
+.privacy-consent-note {
+  font-size: 11px;
+  color: #94a3b8;
+  text-align: center;
+  margin: 6px 0 0 0;
+  line-height: 1.4;
 }

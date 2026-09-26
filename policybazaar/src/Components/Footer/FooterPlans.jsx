@@ -1,86 +1,55 @@
 import { BsUmbrella } from "react-icons/bs"
-import {AiOutlinePlusSquare} from "react-icons/ai"
 import { FaHeartbeat } from 'react-icons/fa'
-import {BiRupee} from "react-icons/bi"
-import {AiTwotoneInsurance} from "react-icons/ai"
+import { AiTwotoneInsurance } from "react-icons/ai"
 import FooterData from "./Data"
-const FooterPlans=()=>
-{
-    return(
-        <>
-            <div>
-            <div className="icontextfooter">
-                    <BsUmbrella size="30" color="white"/>
+import { Link } from "react-router-dom"
+
+const FooterPlans = () => {
+    return (
+        <div style={{ display: "flex", justifyContent: "space-between", width: "100%", flexWrap: "wrap", gap: "30px" }}>
+            <div style={{ flex: "1", minWidth: "220px" }}>
+                <div className="icontextfooter">
+                    <BsUmbrella size="24" color="#60a5fa"/>
                     <h4>Life Insurance</h4>
+                </div>
+                <ul style={{ listStyleType: "none", paddingLeft: "0", marginTop: "12px" }}>
+                    {FooterData["Life Insurance"].map((ele, idx) => (
+                        <li key={idx} style={{ margin: "8px 0" }}>
+                            <Link to="/plans" style={{ color: "#cbd5e1", textDecoration: "none" }}>{ele}</Link>
+                        </li>
+                    ))}
+                </ul>
             </div>
-            {
-                FooterData["Life Insurance"].map((ele)=>
-                {
-                    return(
-                        <li style={{listStyleType:"none",marginLeft:"45px"}}>{ele}</li>
-                    )
-                })
-            }
-            </div>
-            <div>
-            <div className="icontextfooter">
-                    <AiOutlinePlusSquare size="30" color="white"/>
-                    <h4>Other Insurance</h4>
-            </div>
-            {
-                FooterData["Other Insurance"].map((ele)=>
-                {
-                    return(
-                        <li style={{listStyleType:"none",marginLeft:"45px"}}>{ele}</li>
-                    )
-                })
-            }
-            </div>
-            <div>
-            <div className="icontextfooter">
-                    <FaHeartbeat size="30" color="white"/>
+
+            <div style={{ flex: "1", minWidth: "220px" }}>
+                <div className="icontextfooter">
+                    <FaHeartbeat size="24" color="#f87171"/>
                     <h4>Health Insurance</h4>
+                </div>
+                <ul style={{ listStyleType: "none", paddingLeft: "0", marginTop: "12px" }}>
+                    {FooterData["Health Insurance"].map((ele, idx) => (
+                        <li key={idx} style={{ margin: "8px 0" }}>
+                            <Link to="/health" style={{ color: "#cbd5e1", textDecoration: "none" }}>{ele}</Link>
+                        </li>
+                    ))}
+                </ul>
             </div>
-            {
-                FooterData["Health Insurance"].map((ele)=>
-                {
-                    return(
-                        <li style={{listStyleType:"none",marginLeft:"45px"}}>{ele}</li>
-                    )
-                })
-            }
+
+            <div style={{ flex: "1", minWidth: "220px" }}>
+                <div className="icontextfooter">
+                    <AiTwotoneInsurance size="24" color="#34d399"/>
+                    <h4>General Insurance Co. Ltd</h4>
+                </div>
+                <ul style={{ listStyleType: "none", paddingLeft: "0", marginTop: "12px" }}>
+                    {FooterData["General Insurance Co. Ltd"].map((ele, idx) => (
+                        <li key={idx} style={{ margin: "8px 0" }}>
+                            <Link to="/term" style={{ color: "#cbd5e1", textDecoration: "none" }}>{ele}</Link>
+                        </li>
+                    ))}
+                </ul>
             </div>
-            <div>
-            <div className="icontextfooter">
-                    <BiRupee size="30" color="white"/>
-                    <h4>Investment</h4>
-            </div>
-            {
-                FooterData.Investment.map((ele)=>
-                {
-                    return(
-                        <li style={{listStyleType:"none",marginLeft:"45px"}}>{ele}</li>
-                    )
-                })
-            }
-            </div>
-            <div>
-            <div className="icontextfooter">
-                    <AiTwotoneInsurance size="30" color="white"/>
-                    <h4>General Insurance</h4>
-            </div>
-            {
-                FooterData["General Insurance"].map((ele)=>
-                {
-                    return(
-                        <li style={{listStyleType:"none",marginLeft:"45px"}}>{ele}</li>
-                    )
-                })
-            }
-            </div>
-        
-        
-        </>
+        </div>
     )
 }
-export default FooterPlans
+
+export default FooterPlans;

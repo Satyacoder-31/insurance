@@ -1,11 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import {  useDispatch } from "react-redux";
-import { total_amt } from "../redux/action";
-
-// import { useSelector } from "react-redux";
-
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "./payment.css";
+
+const total_amt = (payload) => ({ type: "TOTAL_AMT", payload });
 
 const Payment = () => {
   let dispatch = useDispatch()
@@ -94,12 +93,20 @@ const Payment = () => {
   
   // const mrp = useSelector((store) => store.total_amt);
   
+  const navigate = useNavigate();
   const proceed_to_proposal = () => {
-    dispatch(total_amt(total_price))
-
-    //use navigate render new page
-
-  }
+    dispatch(total_amt(total_price));
+    const carePlan = {
+      insurerName: "Care Health Insurance",
+      planName: "Care Supreme Health Shield",
+      lifeCover: "₹10 Lakhs",
+      premium: total_price,
+      periodText: year === 0 ? "/1 year" : year === 1 ? "/2 years" : "/3 years",
+      category: "Health Insurance"
+    };
+    sessionStorage.setItem("selectedPlan", JSON.stringify(carePlan));
+    navigate("/checkout");
+  };
 
   return (
     <div className="paymentPage-top-container">
@@ -118,7 +125,7 @@ const Payment = () => {
             </ul>
           </div>
           <div id="extra-info">
-            <p>Policy Bazaar is 5 star partner for health care</p>
+            <p>SafeLife is 5 star partner for health care</p>
           </div>
         </div>
         <div>
@@ -419,7 +426,7 @@ const Payment = () => {
             giving reasonable assistance to the client in pursuance of the
             claim. For further details, 24x7 Claims Support Helpline can be
             reached out at 1800-258-5881. Terms and Conditions Apply*.
-            Policybazaar strives to provide best claim support services to its
+            SafeLife strives to provide best claim support services to its
             clients. The settlement of the claim is the responsibility of the
             insurance company in accordance with the terms and conditions of the
             insurance policy opted by you. The 30-minute Claim support is not
@@ -427,16 +434,16 @@ const Payment = () => {
             majeure event or unavailability of company’s executives for reasons
             which are beyond our control. These terms may change without notice.
             <br />
-            Policybazaar Insurance Brokers Private Limited | CIN:
+            SafeLife Insurance Brokers Private Limited | CIN:
             U74999HR2014PTC053454 | Registered Office - Plot No.119, Sector -
             44, Gurgaon, Haryana - 122001 Contact Us | Legal and Admin Policies
-            Policybazaar is now registered as a Direct Broker |Registration No.
-            742, Registration Code No. IRDA/ DB 797/ 19, Valid till 09/06/2024,
+            SafeLife is now registered as a Direct Broker |Registration No.
+            742, Registration Code No. IRDA/ DB 797/ 19, Valid till 09/06/2026,
             License category- Direct Broker (Life & General)| Visitors are
             hereby informed that their information submitted on the website may
-            be shared with insurers.Product information is authentic and solely
+            be shared with insurers. Product information is authentic and solely
             based on the information received from the insurers. © Copyright
-            2008-2023 policybazaar.com. All Rights Reserved.
+            2008-2026 safelife.com. All Rights Reserved.
           </p>
         </div>
       </div>

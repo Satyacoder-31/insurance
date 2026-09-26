@@ -1,5 +1,12 @@
-.maindiv{
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
+.maindiv {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 80px);
+  background: #ffffff;
+}
 
+@media screen and (max-width: 960px) {
+  .maindiv {
+    grid-template-columns: 1fr;
+  }
 }

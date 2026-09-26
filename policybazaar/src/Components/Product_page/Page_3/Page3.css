@@ -1,17 +1,77 @@
-.page3_display{
-    display: grid;
+/* SafeLife Wizard Step 3 Styles */
+.city-input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+}
 
+.city-input-field label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #334155;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
-.page3_display>fieldset{
-    width: 300px;
-    margin: 30px;
+
+.city-input-field input {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid #cbd5e1;
+  font-size: 15px;
+  color: #0f172a;
+  outline: none;
+  transition: all 0.2s;
 }
-.page3_display+div{
-    display: grid;
-    justify-content: center;
+
+.city-input-field input:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
 }
-.page3_display+div>button{
-    width: 300%;
-    height: 40px;
-    border-radius: 10px;
+
+.popular-cities-section {
+  margin-bottom: 16px;
+}
+
+.cities-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.cities-chips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.city-chip {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.city-chip:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.city-chip.active {
+  background: #fee2e2;
+  border-color: #ef4444;
+  color: #b91c1c;
+  font-weight: 700;
 }

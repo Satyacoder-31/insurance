@@ -1,271 +1,434 @@
-*
-{
-    margin: 0px;
-    padding: 0px;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+/* SafeLife Premium Navigation Styles */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+.safelife-navbar-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 9999;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 }
-#navparent
-{
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 20px;
-    margin:0px 100px;
+
+.safelife-navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 12px 24px;
 }
-#navparent>div:first-child
-{
-    width: 15%;
+
+.safelife-nav-brand {
+  display: flex;
+  align-items: center;
 }
-#navparent>div:first-child img
-{
-    width: 100%;
+
+.safelife-nav-brand img {
+  display: block;
+  transition: transform 0.2s ease;
 }
-#navparent>div:nth-child(2)
-{
-    display: flex;
-    flex-direction: row;
-    justify-content: right;
-    width: 70%;
+
+.safelife-nav-brand img:hover {
+  transform: scale(1.02);
 }
-#navparent>div:nth-child(2)>div
-{
-    display: flex;
-    flex-direction: row;
-    justify-content: right;
-    gap: 8px;
-    align-items: center;
-    padding: 0px 40px;
+
+.safelife-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
-#navparent>div:nth-child(2) a
-{
-    text-decoration: none;
-    color: rgb(23, 43, 77);
-    font-weight: 400;
-    font-size: 16px;
+
+.safelife-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
 }
-#navparent>div:nth-child(3) button
-{
-    width: 100%;
-    padding: 10px;
-    border-radius: 10px;
-    border: 2px solid #0065ff;
-    background-color: white;
+
+.safelife-nav-item .nav-title {
+  color: #1e293b;
+  font-size: 14.5px;
+  font-weight: 600;
+  transition: color 0.2s;
 }
-#navparent>div:nth-child(4) button
-{
-    width: 100%;
-    padding: 10px;
-    border-radius: 10px;
-    border: 2px solid #0065ff;
-    background-color: white;
+
+.safelife-nav-item:hover,
+.safelife-nav-item.active {
+  background: #f1f5f9;
 }
-#navparent>div:nth-child(3) button *,#navparent>div:nth-child(4) button *
-{
-    text-decoration: none;
-    color:  #0065ff;
+
+.safelife-nav-item:hover .nav-title,
+.safelife-nav-item.active .nav-title {
+  color: #2563eb;
 }
-#navbarinsuranceprod
-{
-    display: flex;
-    position: absolute;
-    top: 10%;
-    left: 10%;
-    width: 85%;
-    margin: auto;
-    padding: 20px;
-    justify-content: space-evenly;
-    gap: 40px;
-    line-height: 40px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    z-index: 1000;
-    background-color: white;
+
+.safelife-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
-#navbarinsuranceprod a
-{
-    text-decoration: none;
-    color: #53617b;
+
+.safelife-btn-signin {
+  padding: 8px 22px;
+  border-radius: 10px;
+  border: 1.5px solid #2563eb;
+  background: #ffffff;
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.08);
 }
-#navbarinsuranceprod a:hover
-{
-    color: #0065ff;
+
+.safelife-btn-signin:hover {
+  background: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+  transform: translateY(-1px);
 }
-#navbarinsuranceprod h3{
-    color: #0065ff;
+
+.safelife-btn-signout {
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: 1.5px solid #e2e8f0;
+  background: #f8fafc;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
-.icontext
-{
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    align-items: center;
+
+.safelife-btn-signout:hover {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #fecaca;
 }
-#navbarrenew
-{
-    width: 15%;
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    padding: 20px;
-    line-height: 40px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    background-color: white;
-    z-index: 1000;
+
+/* Dropdown Container & Floating Animations */
+.safelife-dropdown-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  pointer-events: auto;
+  z-index: 10000;
+  padding-top: 6px;
+  animation: navDropdownFade 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
-#navbarrenew a,#navbarclaim a
-{
-    text-decoration: none;
-    color: #53617b;
+
+@keyframes navDropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-#navbarrenew a:hover,#navbarclaim a:hover
-{
-    color: #0065ff;
+
+.safelife-dropdown-card {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 20px 40px -8px rgba(15, 23, 42, 0.12), 0 0 1px 1px rgba(15, 23, 42, 0.05);
+  padding: 24px;
 }
-#navbarclaim
-{
-    width: 20%;
-    position: absolute;
-    top:10%;
-    left: 60%;
-    background-color: white;
-    padding: 20px;
-    line-height: 40px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    z-index: 1000;
+
+/* Insurance Multi-column Dropdown */
+.safelife-dropdown-insurance {
+  width: 90%;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
 }
-#navsupport
-{
-    width: 20%;
-    position: absolute;
-    top:10%;
-    left: 60%;
-    padding: 20px;
-    line-height: 40px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    background-color: white;
-    z-index: 1000;
+
+.safelife-dropdown-col {
+  padding: 4px 8px;
 }
-#navsupport a
-{
-    text-decoration: none;
-    color: #53617b;
+
+.icontext {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
 }
-.supportbutton
-{
-    background-color: rgb(230, 252, 255);
-    border: 2px solid rgb(0, 184, 217);
-    width: 30%;
-    border-radius: 10px;
-    font-size: 12px;
-    color: rgb(0, 184, 217);
-    text-align: center;
+
+.icontext h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
 }
-.supportwrapper::after
-{
-    content:" ";
-    width: 200px;
-    height: 1px;
-    vertical-align: super;
-    background-color:rgb(0, 184, 217);
-    display:inline-block;
+
+.col-sub {
+  font-size: 11.5px;
+  color: #64748b;
+  font-weight: 600;
+  display: block;
 }
-#navcontact
-{
-    display: flex;
-    gap: 10px;
-    justify-content: space-evenly;
+
+.icon-wrapper {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
-#navcontact div
-{
-    text-align: center;
-    line-height: 20px;
+
+.icon-wrapper-life {
+  background: #eff6ff;
 }
-.contreacticons
-{
-    border: 1px solid gray;
-    padding: 5px;
-    border-radius: 5px;
+
+.icon-wrapper-health {
+  background: #fef2f2;
 }
-#navinfodetails
-{
-    margin-top: 20px;
+
+.icon-wrapper-general {
+  background: #ecfdf5;
 }
-#navmenu
-{
-    display: none;
+
+.dropdown-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
+
+.dropdown-list li {
+  margin: 6px 0;
+}
+
+.dropdown-list a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #334155;
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: all 0.18s ease;
+}
+
+.dropdown-list a:hover {
+  background: #f8fafc;
+  color: #2563eb;
+  transform: translateX(3px);
+}
+
+.item-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.item-dot-life {
+  background: #3b82f6;
+}
+
+.item-dot-health {
+  background: #ef4444;
+}
+
+.item-dot-general {
+  background: #10b981;
+}
+
+/* Small Dropdowns: Renew & Claim */
+.safelife-dropdown-small {
+  width: 290px;
+  padding: 18px 20px;
+}
+
+.dropdown-heading {
+  font-size: 14px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.renew-item, .claim-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  transition: all 0.2s;
+  margin-bottom: 4px;
+}
+
+.renew-item:hover, .claim-item:hover {
+  background: #f8fafc;
+  transform: translateX(3px);
+}
+
+.renew-item a, .claim-item a {
+  text-decoration: none;
+  color: #334155;
+  font-size: 13.5px;
+  font-weight: 600;
+  flex: 1;
+}
+
+.renew-item a:hover, .claim-item a:hover {
+  color: #2563eb;
+}
+
+/* Support Dropdown */
+.safelife-dropdown-support {
+  width: 360px;
+  padding: 20px;
+}
+
+.support-badge {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #2563eb;
+  background: #eff6ff;
+  padding: 3px 10px;
+  border-radius: 12px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.support-badge-contact {
+  color: #059669;
+  background: #ecfdf5;
+}
+
+#navmyaccount .icontext {
+  padding: 6px 8px;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  transition: all 0.2s;
+}
+
+#navmyaccount .icontext:hover {
+  background: #f8fafc;
+  transform: translateX(3px);
+}
+
+#navmyaccount a {
+  text-decoration: none;
+  color: #334155;
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+#navmyaccount a:hover {
+  color: #2563eb;
+}
+
+#navcontact {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+#navcontact div {
+  background: #f8fafc;
+  padding: 10px 6px;
+  border-radius: 10px;
+  border: 1px solid #f1f5f9;
+  transition: all 0.2s;
+}
+
+#navcontact div:hover {
+  background: #ffffff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  border-color: #e2e8f0;
+}
+
+#navcontact a {
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.contreacticons {
+  margin-bottom: 4px;
+}
+
+#navinfodetails {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#navinfodetails .icontext {
+  margin: 0;
+}
+
+#navinfodetails p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+}
+
+/* Mobile & Tablet Responsiveness */
+#navmenu {
+  display: none;
+}
+
 @media screen and (max-width: 1024px) {
-    #navparent>div:nth-child(2)
-    {
-        display: none;
-    }
-    #navparent
-    {
-        justify-content: space-between;
-        width: 100%;
-        padding: 20px 0px;
-        margin: 0px 20px;
-    }
-    #navmenu
-    {
-        display: block;
-    }
-    #navsidebar
-    {
-        position: absolute;
-        top: 8%;
-        left: 2%;
-        background-color: white;
-        z-index: 1000;
-        padding: 20px;
-        line-height: 40px;
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    }
-    #navsidebar a
-    {
-        text-decoration: none;
-        color: #53617b;
-    }
-    #navparent>div:first-child
-    {
-        width: 100%;
-    }
-}
-@media screen and (max-width: 450px) {
-    #navparent>div:nth-child(2)
-    {
-        display: none;
-    }
-    #navparent
-    {
-        width: 100%;
-        justify-content: space-between;
-        padding:20px 0px;
-        margin: 0px 20px;
-    }
-    #navmenu
-    {
-        display: block;
-    }
-    #navsidebar
-    {
-        position: absolute;
-        top: 8%;
-        left: 2%;
-        background-color: white;
-        z-index: 1000;
-        padding: 20px;
-        line-height: 40px;
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    }
-    #navsidebar a
-    {
-        text-decoration: none;
-        color: #53617b;
-    }
-    #navparent>div:first-child
-    {
-        width: 100%;
-    }
+  .safelife-nav-links {
+    display: none;
+  }
+  #navmenu {
+    display: block;
+  }
+  .safelife-dropdown-container {
+    display: none;
+  }
 }
 
+#navsidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;
+  background: #ffffff;
+  z-index: 10001;
+  padding: 24px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
+#navsidebar a {
+  text-decoration: none;
+  color: #1e293b;
+  font-weight: 600;
+  font-size: 15px;
+}

@@ -1,21 +1,81 @@
-.family_main{
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
+/* SafeLife Health Insurance Landing Styles */
+.family_main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 80px);
+  background: #ffffff;
 }
-.leftside{
-    text-align: left;
-}
-.leftside_img{
 
-    width: 70%;
-    height: 500px;
+.family-leftside {
+  padding: 50px 40px;
+  background: radial-gradient(circle at 10% 20%, #fef2f2 0%, #ffffff 80%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-right: 1px solid #f1f5f9;
 }
-.leftside>ul{
-    display: grid;
-    gap: 10px;
+
+.family-left-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 16px;
 }
-.leftside>ul>span{
-    font-size: x-large;
-    font-weight: 700;
-    font-style: italic;
+
+.family-left-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 24px 0;
+  line-height: 1.3;
+}
+
+.family-benefits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.family-benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.family-benefit-item h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 2px 0;
+}
+
+.family-benefit-item p {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.family-leftside-img {
+  max-width: 380px;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+@media screen and (max-width: 960px) {
+  .family_main {
+    grid-template-columns: 1fr;
+  }
+  .family-leftside {
+    display: none;
+  }
 }
