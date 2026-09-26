@@ -990,24 +990,130 @@
   }
 }
 
+@media (max-width: 768px) {
+  .checkout-header-inner {
+    padding: 10px 16px;
+  }
+  .checkout-header-support {
+    gap: 8px;
+  }
+  .checkout-security-tag {
+    display: none;
+  }
+  .checkout-support-pill {
+    padding: 4px 10px;
+    font-size: 11.5px;
+  }
+}
+
 @media (max-width: 640px) {
+  .checkout-stepper-container {
+    padding: 10px 8px;
+  }
   .checkout-stepper-inner {
-    flex-wrap: wrap;
-    gap: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2px;
+    width: 100%;
   }
   .checkout-stepper-line {
     display: none;
   }
+  .checkout-step-node {
+    padding: 0 2px;
+    flex: 1;
+    text-align: center;
+  }
+  .step-node-bubble {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
+  .step-node-label {
+    font-size: 10px;
+    line-height: 1.2;
+    white-space: normal;
+  }
+  .checkout-main-grid {
+    margin-top: 14px;
+    padding: 0 10px;
+    gap: 16px;
+  }
+  .checkout-form-card {
+    padding: 18px 14px;
+    border-radius: 12px;
+  }
+  .checkout-step-header h2 {
+    font-size: 19px;
+  }
+  .checkout-step-header p {
+    font-size: 13px;
+  }
   .form-grid-2 {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .form-grid-3 {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .uw-question-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .yes-no-toggle {
+    width: 100%;
+  }
+  .yes-no-btn {
+    padding: 10px 14px;
+    font-size: 14px;
   }
   .conditions-grid {
     grid-template-columns: 1fr;
   }
   .payment-tabs-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 8px;
   }
-  .checkout-form-card {
-    padding: 20px 16px;
+  .payment-tab-btn {
+    padding: 10px 6px;
+    font-size: 12px;
+  }
+  .form-actions-row {
+    flex-direction: column-reverse;
+    gap: 10px;
+    align-items: stretch;
+  }
+  .btn-form-back,
+  .btn-form-next {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+  .cert-details-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .cert-footer-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .btn-cert-download,
+  .btn-cert-home {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .policy-certificate-card {
+    border-radius: 12px;
+    padding: 0;
+  }
+  .certificate-body {
+    padding: 18px 14px;
+  }
+  .certificate-header {
+    padding: 16px;
   }
 }

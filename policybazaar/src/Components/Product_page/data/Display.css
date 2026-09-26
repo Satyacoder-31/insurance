@@ -545,26 +545,105 @@
 }
 
 @media screen and (max-width: 900px) {
+  .plans-header-banner {
+    padding: 24px 16px 18px 16px;
+  }
+  .banner-title-row h1 {
+    font-size: 24px;
+  }
+  .banner-title-row p {
+    font-size: 13.5px;
+  }
+  .plans-category-switch-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+  }
+  .plans-category-switch-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .cat-tab {
+    white-space: nowrap;
+    padding: 8px 14px;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .plans-filter-section {
+    position: static;
+    padding: 12px 16px;
+  }
+  .plans-content-container {
+    padding: 0 16px;
+    margin: 20px auto;
+  }
   .plan-card {
     flex-direction: column;
     align-items: stretch;
+    padding: 20px 16px;
+    gap: 18px;
   }
   .plan-card-right {
     border-left: none;
     border-top: 1px dashed #e2e8f0;
     padding-left: 0;
-    padding-top: 18px;
-    align-items: center;
+    padding-top: 16px;
+    align-items: stretch;
     text-align: center;
+    width: 100%;
   }
   .plan-price-box {
     text-align: center;
   }
+  .btn-select-plan {
+    width: 100%;
+    justify-content: center;
+  }
   .plans-filter-container {
     flex-direction: column;
     align-items: stretch;
+    gap: 10px;
+  }
+  .filter-group {
+    width: 100%;
+  }
+  .filter-group select,
+  .input-filter-search {
+    width: 100%;
+    box-sizing: border-box;
   }
   .billing-toggle-group {
     margin-left: 0;
+    width: 100%;
+    justify-content: center;
+  }
+  .toggle-btn {
+    flex: 1;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .plan-metrics-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 12px;
+  }
+  .metric-value {
+    font-size: 14.5px;
+  }
+  .plan-logo-box {
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .insurer-logo-img {
+    width: 80px;
+    height: 40px;
+  }
+  .plan-insurer-title {
+    font-size: 17px;
+  }
+  .price-amount {
+    font-size: 24px;
   }
 }
