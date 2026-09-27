@@ -6,7 +6,11 @@ import { AiTwotoneInsurance } from "react-icons/ai"
 const Renew = ({ onClose }) => {
     return (
         <div id="navbarrenew" className="safelife-dropdown-card safelife-dropdown-small">
-            <h4 className="dropdown-heading">Renew Your Policy</h4>
+            <h4 className="dropdown-heading">
+                <Link to="/renewal" onClick={onClose} style={{ textDecoration: 'none', color: 'inherit' }}>
+                    Renew Your Policy &rarr;
+                </Link>
+            </h4>
             <div className="renew-item">
                 <div className="icon-wrapper icon-wrapper-life">
                     <FiUmbrella color="#2563eb" size="18"/>

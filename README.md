@@ -2,7 +2,7 @@
 <h5>
 Policy Bazaar is a website where users can purchase policies and insurances related to health, car, and several other amenities.<br/> 
 This project is a clone of Policy Bazaar being a collaborative effort by a team of 5 Full Stack Web Developers and executed in a week.<br/><br/>
- The Website Clone: https://policy-bazaar-clone.vercel.app/<br/><br/>
+ The Website Clone: https://policybazaar-blush.vercel.app/<br/><br/>
   <ins>The Features Developed: </ins>
  <ul>
    <li>Home Page,</li>

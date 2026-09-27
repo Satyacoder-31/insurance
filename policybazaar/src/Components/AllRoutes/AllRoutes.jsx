@@ -13,6 +13,9 @@ import { Page4 } from "../Product_page/Page_4/Page4";
 import { Display_data } from "../Product_page/data/Display_data";
 import { Product } from "../Product_page/Insurance_page/Product";
 import Payment from "../Payment/Payment";
+import RenewalPortal from "../Portals/RenewalPortal";
+import ClaimPortal from "../Portals/ClaimPortal";
+import SupportPortal from "../Portals/SupportPortal";
 
 const AllRoutes = () => {
   return (
@@ -32,6 +35,18 @@ const AllRoutes = () => {
         {/* Life Insurance & Term Flow */}
         <Route path="/plans" element={<Display_data />} />
         <Route path="/term" element={<Product />} />
+
+        {/* Renewal Portal Routes */}
+        <Route path="/renewal" element={<RenewalPortal />} />
+        <Route path="/renewal/:type" element={<RenewalPortal />} />
+
+        {/* Claims Assistance Portal Routes */}
+        <Route path="/claim" element={<ClaimPortal />} />
+        <Route path="/claim/:action" element={<ClaimPortal />} />
+
+        {/* Customer Support Portal Routes */}
+        <Route path="/support" element={<SupportPortal />} />
+        <Route path="/support/*" element={<SupportPortal />} />
 
         {/* Dynamic routes for dealt insurance providers */}
         {Data.LifeInsurance.map((ele, i) => (
@@ -58,6 +73,9 @@ const AllRoutes = () => {
             </ChakraProvider>
           }
         />
+
+        {/* Fallback to Home */}
+        <Route path="*" element={<HomePage />} />
       </Routes>
     </div>
   );

@@ -30,6 +30,10 @@ export const Display_data = () => {
         if (cat && (cat === "life" || cat === "health" || cat === "general")) {
             setActiveCategory(cat);
         }
+        const ins = searchParams.get("insurer");
+        if (ins) {
+            setSelectedInsurer(decodeURIComponent(ins));
+        }
     }, [searchParams]);
 
     const handleCategoryChange = (cat) => {

@@ -5,7 +5,11 @@ import { RiFileTextLine, RiSearchLine, RiInformationLine, RiCheckboxCircleLine }
 const Claim = ({ onClose }) => {
     return (
         <div id="navbarclaim" className="safelife-dropdown-card safelife-dropdown-small">
-            <h4 className="dropdown-heading">Claims Assistance</h4>
+            <h4 className="dropdown-heading">
+                <Link to="/claim" onClick={onClose} style={{ textDecoration: 'none', color: 'inherit' }}>
+                    Claims Assistance &rarr;
+                </Link>
+            </h4>
             <div className="claim-item">
                 <RiFileTextLine color="#2563eb" size="18" />
                 <Link to="/claim/new-claim" onClick={onClose}>File a New Claim</Link>

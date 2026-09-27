@@ -21,6 +21,7 @@ const Navbar = () => {
     const [activeMenu, setActiveMenu] = useState(null) // 'IP' | 'RP' | 'Cl' | 'Sup' | null
     const [display, setdisplay] = useState(false)
     const timeoutRef = useRef(null)
+    const navRef = useRef(null)
 
     const handleMouseEnter = (menuKey) => {
         if (timeoutRef.current) {
@@ -36,7 +37,7 @@ const Navbar = () => {
         }
         timeoutRef.current = setTimeout(() => {
             setActiveMenu(null)
-        }, 180)
+        }, 200)
     }
 
     const handleCancelLeave = () => {
@@ -44,6 +45,14 @@ const Navbar = () => {
             clearTimeout(timeoutRef.current)
             timeoutRef.current = null
         }
+    }
+
+    const handleToggle = (menuKey) => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current)
+            timeoutRef.current = null
+        }
+        setActiveMenu(prev => prev === menuKey ? null : menuKey)
     }
 
     const closeAll = () => {
@@ -55,13 +64,27 @@ const Navbar = () => {
     }
 
     useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (navRef.current && !navRef.current.contains(e.target)) {
+                setActiveMenu(null)
+            }
+        }
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                setActiveMenu(null)
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside)
+        document.addEventListener('keydown', handleKeyDown)
         return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+            document.removeEventListener('keydown', handleKeyDown)
             if (timeoutRef.current) clearTimeout(timeoutRef.current)
         }
     }, [])
 
     return (
-        <header className="safelife-navbar-header" onMouseLeave={handleMouseLeave}>
+        <header className="safelife-navbar-header" ref={navRef} onMouseLeave={handleMouseLeave}>
             <div className="safelife-navbar-container">
                 <div className="safelife-nav-brand">
                     <HiOutlineMenu 
@@ -69,6 +92,7 @@ const Navbar = () => {
                         id="navmenu" 
                         size={28}
                         style={{ cursor: "pointer", marginRight: "12px", color: "#1e293b" }}
+                        title="Open menu"
                     />
                     <Link to="/" onClick={closeAll}>
                         <img id="navlogo" alt="SafeLife" src={safelifeLogo} style={{ height: "46px", objectFit: "contain" }} />
@@ -79,6 +103,10 @@ const Navbar = () => {
                     <div 
                         className={`safelife-nav-item ${activeMenu === 'IP' ? 'active' : ''}`}
                         onMouseEnter={() => handleMouseEnter('IP')}
+                        onClick={() => handleToggle('IP')}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleToggle('IP'); } }}
                     >
                         <span className="nav-title">Insurance Products</span>
                         {activeMenu === 'IP' ? <FcCollapse size="18" /> : <FcExpand size="18" />}
@@ -87,6 +115,10 @@ const Navbar = () => {
                     <div 
                         className={`safelife-nav-item ${activeMenu === 'RP' ? 'active' : ''}`}
                         onMouseEnter={() => handleMouseEnter('RP')}
+                        onClick={() => handleToggle('RP')}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleToggle('RP'); } }}
                     >
                         <span className="nav-title">Renew Your Policy</span>
                         {activeMenu === 'RP' ? <FcCollapse size="18" /> : <FcExpand size="18" />}
@@ -95,6 +127,10 @@ const Navbar = () => {
                     <div 
                         className={`safelife-nav-item ${activeMenu === 'Cl' ? 'active' : ''}`}
                         onMouseEnter={() => handleMouseEnter('Cl')}
+                        onClick={() => handleToggle('Cl')}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleToggle('Cl'); } }}
                     >
                         <span className="nav-title">Claim</span>
                         {activeMenu === 'Cl' ? <FcCollapse size="18" /> : <FcExpand size="18" />}
@@ -103,6 +139,10 @@ const Navbar = () => {
                     <div 
                         className={`safelife-nav-item ${activeMenu === 'Sup' ? 'active' : ''}`}
                         onMouseEnter={() => handleMouseEnter('Sup')}
+                        onClick={() => handleToggle('Sup')}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleToggle('Sup'); } }}
                     >
                         <span className="nav-title">Support</span>
                         {activeMenu === 'Sup' ? <FcCollapse size="18" /> : <FcExpand size="18" />}

@@ -10,7 +10,11 @@ const Support = ({ onClose }) => {
     return (
         <div id="navsupport" className="safelife-dropdown-card safelife-dropdown-support">
             <div className="support-section">
-                <span className="support-badge">My Account</span>
+                <span className="support-badge">
+                    <Link to="/support/account/policies" onClick={onClose} style={{ textDecoration: 'none', color: 'inherit' }}>
+                        My Account &rarr;
+                    </Link>
+                </span>
                 <div id="navmyaccount">
                     <div className="icontext">
                         <CgNotes size="18" color="#10b981"/>
@@ -32,7 +36,11 @@ const Support = ({ onClose }) => {
             </div>
 
             <div className="support-section" style={{ marginTop: "14px", borderTop: "1px solid #f1f5f9", paddingTop: "12px" }}>
-                <span className="support-badge support-badge-contact">Contact SafeLife</span>
+                <span className="support-badge support-badge-contact">
+                    <Link to="/support/contact/whatsapp" onClick={onClose} style={{ textDecoration: 'none', color: 'inherit' }}>
+                        Contact SafeLife &rarr;
+                    </Link>
+                </span>
                 <div id="navcontact">
                     <div>
                         <BsWhatsapp size="20" color="#22c55e" className="contreacticons"/><br/>
@@ -40,21 +48,21 @@ const Support = ({ onClose }) => {
                     </div>
                     <div>
                         <FaStore size="20" color="#f97316" className="contreacticons" /><br/>
-                        <Link to="/support/contact/whatsapp" onClick={onClose}>Nearest Hub</Link>
+                        <Link to="/support/contact/hub" onClick={onClose}>Nearest Hub</Link>
                     </div>
                     <div>
                         <SlCallIn size="20" color="#2563eb" className="contreacticons"/><br/>
-                        <Link to="/support/contact/whatsapp" onClick={onClose}>Callback</Link>
+                        <Link to="/support/contact/callback" onClick={onClose}>Callback</Link>
                     </div>
                 </div>
                 <div id="navinfodetails">
                     <div className="icontext">
                         <SlEarphonesAlt size="16" color="#22c55e" />
-                        <p>Support: 1800-208-8787</p>
+                        <p>Support: <a href="tel:18002088787" style={{ color: 'inherit', textDecoration: 'none' }}>1800-208-8787</a></p>
                     </div>
                     <div className="icontext">
                         <FaRegMoneyBillAlt size="16" color="#f97316" />
-                        <p>Claims: 1800-258-5881</p>
+                        <p>Claims: <a href="tel:18002585881" style={{ color: 'inherit', textDecoration: 'none' }}>1800-258-5881</a></p>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FiX, FiShield, FiHeart, FiPhoneCall, FiUser, FiHelpCircle, FiCheckCircle, FiFileText, FiAward } from "react-icons/fi";
+import { FiX, FiShield, FiHeart, FiPhoneCall, FiUser, FiHelpCircle, FiCheckCircle, FiFileText, FiAward, FiRefreshCw } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import safelifeLogo from "../../assets/images/safelife-logo.svg";
 
@@ -102,8 +102,38 @@ const SideMenu = ({ setdisplay }) => {
             </Link>
           </div>
 
-          <div className="drawer-section-title">Quick Actions</div>
+          <div className="drawer-section-title">Quick Actions & Services</div>
           <div className="drawer-links-group">
+            <Link to="/renewal" className="drawer-link-item" onClick={handleClose}>
+              <div className="drawer-icon-box icon-renew">
+                <FiRefreshCw size={16} />
+              </div>
+              <div className="drawer-link-text">
+                <strong>Renew Existing Policy</strong>
+                <span>Instant NCB discount & zero paperwork</span>
+              </div>
+            </Link>
+
+            <Link to="/claim" className="drawer-link-item" onClick={handleClose}>
+              <div className="drawer-icon-box" style={{ background: '#ecfdf5', color: '#059669', width: '36px', height: '36px', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <FiCheckCircle size={16} />
+              </div>
+              <div className="drawer-link-text">
+                <strong>Claims Assistance & Tracking</strong>
+                <span>30-minute cashless hospital guarantee</span>
+              </div>
+            </Link>
+
+            <Link to="/support" className="drawer-link-item" onClick={handleClose}>
+              <div className="drawer-icon-box" style={{ background: '#f5f3ff', color: '#7c3aed', width: '36px', height: '36px', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <FiHelpCircle size={16} />
+              </div>
+              <div className="drawer-link-text">
+                <strong>Customer Support & FAQs</strong>
+                <span>Tax proofs, advisor verify & WhatsApp desk</span>
+              </div>
+            </Link>
+
             <Link to="/checkout" className="drawer-link-item" onClick={handleClose}>
               <div className="drawer-icon-box icon-buy">
                 <FiCheckCircle size={16} />
@@ -111,16 +141,6 @@ const SideMenu = ({ setdisplay }) => {
               <div className="drawer-link-text">
                 <strong>Proposal & Buy Portal</strong>
                 <span>Instant IRDAI Policy Issuance</span>
-              </div>
-            </Link>
-
-            <Link to="/" className="drawer-link-item" onClick={handleClose}>
-              <div className="drawer-icon-box icon-renew">
-                <FiHelpCircle size={16} />
-              </div>
-              <div className="drawer-link-text">
-                <strong>Renew Existing Policy</strong>
-                <span>No paperwork needed</span>
               </div>
             </Link>
           </div>
