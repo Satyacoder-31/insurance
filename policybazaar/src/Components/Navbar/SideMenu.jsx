@@ -134,6 +134,16 @@ const SideMenu = ({ setdisplay }) => {
               </div>
             </Link>
 
+            <Link to="/admin" className="drawer-link-item" onClick={handleClose}>
+              <div className="drawer-icon-box" style={{ background: '#0f172a', color: '#38bdf8', width: '36px', height: '36px', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <FiShield size={16} />
+              </div>
+              <div className="drawer-link-text">
+                <strong style={{ color: '#0284c7' }}>Operations Admin Panel</strong>
+                <span>View all forms, claims & support tickets</span>
+              </div>
+            </Link>
+
             <Link to="/checkout" className="drawer-link-item" onClick={handleClose}>
               <div className="drawer-icon-box icon-buy">
                 <FiCheckCircle size={16} />

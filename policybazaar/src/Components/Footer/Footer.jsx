@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import FooterPlans from "./FooterPlans"
 import "./Footer.css"
 
@@ -32,6 +33,11 @@ const Footer = () => {
                 <FooterEnd />
             </div>
             <div id="tc" style={{textAlign:"center",color:"#585858"}}>
+                <p style={{ margin: "14px 0" }}>
+                    <Link to="/admin" style={{ color: "#2563eb", fontWeight: "700", textDecoration: "none", background: "#eff6ff", padding: "6px 14px", borderRadius: "8px", border: "1px solid #bfdbfe" }}>
+                        🛡️ SafeLife Operations Admin Control Center
+                    </Link>
+                </p>
                 <p>**Discount is offered by the Insurance company as approved by IRDAI for the product under File & Use guidelines</p> 
                 <p>#On the basis of your profile</p>
                 <p>SafeLife Insurance Brokers Private Limited | CIN: U74999HR2014PTC053454 | Registered Office - Plot No.119, Sector - 44, Gurgaon, Haryana - 122001 Tel no. : 0124-4218302 Email ID: enquiry@safelife.com</p>

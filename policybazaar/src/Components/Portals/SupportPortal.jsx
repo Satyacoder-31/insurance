@@ -17,6 +17,7 @@ import {
 } from 'react-icons/fi';
 import { BsWhatsapp } from 'react-icons/bs';
 import { RiCustomerService2Line } from 'react-icons/ri';
+import adminStore from '../../services/adminStore';
 
 export const SupportPortal = () => {
   const location = useLocation();
@@ -71,12 +72,32 @@ export const SupportPortal = () => {
 
   const handleTicketSubmit = (e) => {
     e.preventDefault();
-    setTicketSubmitted(`TKT-${Math.floor(10000 + Math.random() * 90000)}`);
+    const generatedId = `TKT-${Math.floor(10000 + Math.random() * 90000)}`;
+    setTicketSubmitted(generatedId);
+
+    // Save ticket into admin store
+    adminStore.saveTicket({
+      ticketId: generatedId,
+      customerName: ticketData.name || 'Valued Customer',
+      phone: ticketData.phone || '9876543210',
+      category: ticketData.category || 'General Support',
+      message: ticketData.message || 'Customer inquiry submitted',
+      status: 'Open',
+      priority: 'Normal'
+    });
   };
 
   const handleCallbackSubmit = (e) => {
     e.preventDefault();
     setCallbackSubmitted(true);
+
+    // Save callback request into admin store
+    adminStore.saveCallback({
+      customerName: callbackData.name || 'Valued Customer',
+      phone: callbackData.phone || '9876543210',
+      topic: callbackData.topic || 'General Consultation',
+      status: 'Pending'
+    });
   };
 
   const handleVerifyAdvisor = (e) => {

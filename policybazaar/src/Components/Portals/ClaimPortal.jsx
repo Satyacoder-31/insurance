@@ -18,6 +18,7 @@ import {
   FiAlertCircle, 
   FiDownload 
 } from 'react-icons/fi';
+import adminStore from '../../services/adminStore';
 
 export const ClaimPortal = () => {
   const { action } = useParams();
@@ -81,6 +82,20 @@ export const ClaimPortal = () => {
       hospital: formData.hospitalName || 'Network Healthcare Provider',
       contact: formData.contactNumber || '9876543210'
     });
+
+    // Save claim into admin store
+    adminStore.saveClaim({
+      claimId: generatedId,
+      claimType: claimType,
+      policyNumber: formData.policyNumber || 'POL-SH-928172',
+      patientName: formData.patientName || 'Policyholder',
+      hospitalName: formData.hospitalName || 'Network Healthcare Provider',
+      admissionDate: formData.admissionDate || new Date().toISOString().split('T')[0],
+      phone: formData.contactNumber || '9876543210',
+      estimatedAmount: formData.estimatedAmount || '₹ 1,50,000',
+      status: 'Claim Lodged',
+      surveyorNotes: '30-minute cashless advocate assigned.'
+    });
   };
 
   const handleTrackSubmit = (e) => {
@@ -107,6 +122,18 @@ export const ClaimPortal = () => {
     e.preventDefault();
     if (!insurerRef) return;
     setAlreadyFiledSuccess(true);
+
+    adminStore.saveClaim({
+      claimId: insurerRef,
+      claimType: 'Insurer Direct Escalation',
+      policyNumber: 'Existing Partner Policy',
+      patientName: 'Policyholder',
+      hospitalName: 'Network Center',
+      admissionDate: new Date().toISOString().split('T')[0],
+      phone: '9876543210',
+      status: 'Escalated by SafeLife Advocate',
+      surveyorNotes: 'Nodal officer notified for expedite review.'
+    });
   };
 
   return (

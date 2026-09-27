@@ -15,6 +15,7 @@ import {
 } from 'react-icons/fi';
 import { FaHeartbeat } from 'react-icons/fa';
 import { AiTwotoneInsurance } from 'react-icons/ai';
+import adminStore from '../../services/adminStore';
 
 export const RenewalPortal = () => {
   const { type } = useParams();
@@ -87,6 +88,22 @@ export const RenewalPortal = () => {
 
   const handleProceedToPay = () => {
     if (!policyData) return;
+
+    // Save renewal submission to admin store
+    adminStore.saveRenewal({
+      policyNumber: policyData.policyNumber,
+      customerName: policyData.holderName || 'Satya Sharma',
+      phone: mobileNumber || '9876543210',
+      category: `${activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Insurance Renewal`,
+      insurer: selectedInsurer,
+      planName: policyData.planName,
+      sumInsured: policyData.sumInsured,
+      originalPremium: policyData.currentPremium,
+      ncbDiscount: policyData.ncbDiscount,
+      finalPremium: policyData.finalRenewalPremium,
+      status: 'Renewal Submitted'
+    });
+
     // Route to checkout with policy details
     navigate('/checkout', {
       state: {

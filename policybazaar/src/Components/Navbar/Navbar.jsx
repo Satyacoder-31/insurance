@@ -151,6 +151,15 @@ const Navbar = () => {
 
                 <div className="safelife-nav-actions">
                     <Link 
+                        to="/admin" 
+                        className="safelife-btn-admin"
+                        onClick={closeAll}
+                        title="SafeLife Operations Admin Panel"
+                    >
+                        ⚙️ Admin
+                    </Link>
+
+                    <Link 
                         to="/login" 
                         className="safelife-btn-signin"
                         onClick={closeAll}

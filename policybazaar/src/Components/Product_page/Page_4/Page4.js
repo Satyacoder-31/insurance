@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./Page4.css";
 import { FiArrowLeft, FiArrowRight, FiLock } from 'react-icons/fi';
+import adminStore from '../../../services/adminStore';
 
 export const Page4 = () => {
   const navigate = useNavigate();
@@ -11,6 +12,19 @@ export const Page4 = () => {
 
   const handleFinish = (e) => {
     if (e && e.preventDefault) e.preventDefault();
+    if (name.trim() || number.trim()) {
+      adminStore.saveProposal({
+        customerName: name.trim() || 'Health Applicant',
+        gender: gender === 'male' ? 'Male' : 'Female',
+        phone: number.trim() || '9876543210',
+        policyType: 'Health Insurance',
+        planName: 'Family Health Optima (Quote Requested)',
+        insurer: 'Multi-Partner Comparative',
+        sumInsured: '₹ 25,00,000',
+        premium: 14850,
+        status: 'Quote Generated'
+      });
+    }
     navigate('/plans?category=health');
   };
 

@@ -22,6 +22,7 @@ import {
   FiAward
 } from "react-icons/fi";
 import { recordUserPolicy } from "../../supabaseClient";
+import adminStore from "../../services/adminStore";
 import "./Checkout.css";
 
 const PRE_EXISTING_CONDITIONS_LIST = [
@@ -263,6 +264,26 @@ const FinalCheckout = () => {
       };
 
       await recordUserPolicy(record);
+
+      // Save proposal and policy to Admin Store
+      adminStore.saveProposal({
+        id: generatedPolicyNum,
+        customerName: proposer.fullName,
+        phone: proposer.mobile,
+        email: proposer.email,
+        gender: proposer.gender,
+        policyType: selectedPlan.category || "Comprehensive Insurance",
+        planName: selectedPlan.planName || `${selectedPlan.insurerName} Comprehensive Cover`,
+        insurer: selectedPlan.insurerName,
+        sumInsured: selectedPlan.lifeCover || "₹ 10,00,000",
+        premium: totalPayable,
+        pincode: proposer.pincode,
+        city: proposer.city,
+        members: `Proposer & Nominee (${nominee.fullName} - ${nominee.relationship})`,
+        preExistingDiseases: underwriting.selectedConditions.join(", "),
+        smokingAlcohol: `Tobacco: ${underwriting.tobacco}, Alcohol: ${underwriting.alcohol}`,
+        status: "Policy Issued & Paid"
+      });
 
       const policyDetails = {
         policyNumber: generatedPolicyNum,
