@@ -12,17 +12,53 @@ export const Page4 = () => {
 
   const handleFinish = (e) => {
     if (e && e.preventDefault) e.preventDefault();
+    
+    // Retrieve all details filled across previous wizard steps
+    let membersData = {};
+    let agesData = {};
+    let cityData = 'Mumbai';
+
+    try {
+      const storedMembers = sessionStorage.getItem('wizardMembers');
+      if (storedMembers) membersData = JSON.parse(storedMembers);
+      const storedAges = sessionStorage.getItem('wizardAges');
+      if (storedAges) agesData = JSON.parse(storedAges);
+      const storedCity = sessionStorage.getItem('wizardCity');
+      if (storedCity) cityData = storedCity;
+    } catch (err) {
+      console.error('Error reading wizard session details', err);
+    }
+
+    // Format member list with accurate ages
+    const activeMembers = Object.keys(membersData).filter(k => membersData[k]);
+    const membersToSave = activeMembers.length > 0 ? activeMembers : ['self'];
+    const formattedMemberList = membersToSave.map(m => {
+      const label = m === 'doughter' ? 'Daughter' : m.charAt(0).toUpperCase() + m.slice(1);
+      const age = agesData[m] || (m === 'self' || m === 'spouse' ? 32 : m === 'father' || m === 'mother' ? 60 : 8);
+      return { relation: label, age };
+    });
+
+    const membersSummary = formattedMemberList.map(m => `${m.relation} (${m.age} yrs)`).join(', ');
+
     if (name.trim() || number.trim()) {
       adminStore.saveProposal({
         customerName: name.trim() || 'Health Applicant',
         gender: gender === 'male' ? 'Male' : 'Female',
         phone: number.trim() || '9876543210',
+        email: `${(name.trim() || 'customer').toLowerCase().replace(/\s+/g, '.')}@example.com`,
+        city: cityData,
+        pincode: /^\d{6}$/.test(cityData) ? cityData : '400001',
         policyType: 'Health Insurance',
-        planName: 'Family Health Optima (Quote Requested)',
-        insurer: 'Multi-Partner Comparative',
+        planName: 'Family Health Optima Comprehensive Shield',
+        insurer: 'Care / Star / HDFC ERGO Network',
         sumInsured: '₹ 25,00,000',
         premium: 14850,
-        status: 'Quote Generated'
+        members: membersSummary || 'Self (32 yrs)',
+        membersList: formattedMemberList,
+        preExistingDiseases: 'Standard Multi-Member Declaration',
+        smokingAlcohol: 'Non-smoker',
+        source: 'Health Insurance 4-Step Wizard',
+        status: 'Pending Approval'
       });
     }
     navigate('/plans?category=health');

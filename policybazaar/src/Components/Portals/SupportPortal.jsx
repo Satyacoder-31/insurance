@@ -40,11 +40,26 @@ export const SupportPortal = () => {
   }, [location.pathname]);
 
   // Support Ticket Form State
-  const [ticketData, setTicketData] = useState({ name: '', phone: '', category: 'Policy Query', message: '' });
+  const [ticketData, setTicketData] = useState({ 
+    name: '', 
+    phone: '', 
+    email: '', 
+    policyNumber: '', 
+    category: 'Policy Endorsement / Nominee Change', 
+    priority: 'Normal', 
+    message: '' 
+  });
   const [ticketSubmitted, setTicketSubmitted] = useState(null);
 
   // Callback Form State
-  const [callbackData, setCallbackData] = useState({ name: '', phone: '', topic: 'Renewal Assistance' });
+  const [callbackData, setCallbackData] = useState({ 
+    name: '', 
+    phone: '', 
+    email: '', 
+    topic: 'Renewal Payment Assistance', 
+    timeSlot: 'Immediate (Next 5 mins)', 
+    notes: '' 
+  });
   const [callbackSubmitted, setCallbackSubmitted] = useState(false);
 
   // Advisor Verification State
@@ -75,15 +90,18 @@ export const SupportPortal = () => {
     const generatedId = `TKT-${Math.floor(10000 + Math.random() * 90000)}`;
     setTicketSubmitted(generatedId);
 
-    // Save ticket into admin store
+    // Save ticket into admin store with full customer details
     adminStore.saveTicket({
       ticketId: generatedId,
       customerName: ticketData.name || 'Valued Customer',
       phone: ticketData.phone || '9876543210',
+      email: ticketData.email || `${(ticketData.name || 'customer').toLowerCase().replace(/\s+/g, '.')}@example.com`,
+      policyNumber: ticketData.policyNumber || 'General Account Inquiry',
       category: ticketData.category || 'General Support',
+      priority: ticketData.priority || 'Normal',
       message: ticketData.message || 'Customer inquiry submitted',
       status: 'Open',
-      priority: 'Normal'
+      assignedTo: 'SafeLife Customer Delight Desk'
     });
   };
 
@@ -91,11 +109,14 @@ export const SupportPortal = () => {
     e.preventDefault();
     setCallbackSubmitted(true);
 
-    // Save callback request into admin store
+    // Save callback request into admin store with complete details
     adminStore.saveCallback({
       customerName: callbackData.name || 'Valued Customer',
       phone: callbackData.phone || '9876543210',
+      email: callbackData.email || `${(callbackData.name || 'customer').toLowerCase().replace(/\s+/g, '.')}@example.com`,
       topic: callbackData.topic || 'General Consultation',
+      timeSlot: callbackData.timeSlot || 'Immediate (Next 5 mins)',
+      notes: callbackData.notes || 'Customer requested phone advisory.',
       status: 'Pending'
     });
   };
@@ -366,6 +387,24 @@ export const SupportPortal = () => {
                     />
                   </div>
                   <div className="portal-form-group">
+                    <label>Email Address</label>
+                    <input 
+                      type="email" 
+                      placeholder="e.g. satya@example.com" 
+                      value={ticketData.email}
+                      onChange={(e) => setTicketData({ ...ticketData, email: e.target.value })}
+                    />
+                  </div>
+                  <div className="portal-form-group">
+                    <label>Policy Number (if applicable)</label>
+                    <input 
+                      type="text" 
+                      placeholder="e.g. SL-2026-POL-948201" 
+                      value={ticketData.policyNumber}
+                      onChange={(e) => setTicketData({ ...ticketData, policyNumber: e.target.value })}
+                    />
+                  </div>
+                  <div className="portal-form-group">
                     <label>Inquiry Topic</label>
                     <select 
                       value={ticketData.category}
@@ -378,13 +417,24 @@ export const SupportPortal = () => {
                       <option>Policy Cancellation / Freelook Request</option>
                     </select>
                   </div>
+                  <div className="portal-form-group">
+                    <label>Urgency / Priority</label>
+                    <select 
+                      value={ticketData.priority}
+                      onChange={(e) => setTicketData({ ...ticketData, priority: e.target.value })}
+                    >
+                      <option value="Normal">Normal (Response in 4 hours)</option>
+                      <option value="High">High (Response in 1 hour)</option>
+                      <option value="Critical">Critical / Hospital Escalation</option>
+                    </select>
+                  </div>
                 </div>
 
                 <div className="portal-form-group" style={{ marginBottom: '20px' }}>
-                  <label>Describe your query</label>
+                  <label>Describe your query or request</label>
                   <textarea 
                     rows="3" 
-                    placeholder="Provide details about your policy or query..."
+                    placeholder="Provide details about your policy, endorsement requirements or query..."
                     value={ticketData.message}
                     onChange={(e) => setTicketData({ ...ticketData, message: e.target.value })}
                     required
@@ -669,6 +719,15 @@ export const SupportPortal = () => {
                       />
                     </div>
                     <div className="portal-form-group">
+                      <label>Email Address</label>
+                      <input 
+                        type="email" 
+                        placeholder="e.g. satya@example.com" 
+                        value={callbackData.email}
+                        onChange={(e) => setCallbackData({ ...callbackData, email: e.target.value })}
+                      />
+                    </div>
+                    <div className="portal-form-group">
                       <label>Topic for Discussion</label>
                       <select 
                         value={callbackData.topic}
@@ -678,7 +737,29 @@ export const SupportPortal = () => {
                         <option>Filing a Cashless Hospital Claim</option>
                         <option>New Policy Recommendation</option>
                         <option>Policy Endorsement & Nominee</option>
+                        <option>Tax Deduction Certificate Help</option>
                       </select>
+                    </div>
+                    <div className="portal-form-group">
+                      <label>Preferred Time Slot</label>
+                      <select 
+                        value={callbackData.timeSlot}
+                        onChange={(e) => setCallbackData({ ...callbackData, timeSlot: e.target.value })}
+                      >
+                        <option value="Immediate (Next 5 mins)">Immediate (Next 5 mins)</option>
+                        <option value="Morning (9 AM - 12 PM)">Morning (9 AM - 12 PM)</option>
+                        <option value="Afternoon (12 PM - 4 PM)">Afternoon (12 PM - 4 PM)</option>
+                        <option value="Evening (4 PM - 8 PM)">Evening (4 PM - 8 PM)</option>
+                      </select>
+                    </div>
+                    <div className="portal-form-group">
+                      <label>Questions / Notes for Advisor</label>
+                      <input 
+                        type="text" 
+                        placeholder="e.g. Inquire about family floater 25L discount" 
+                        value={callbackData.notes}
+                        onChange={(e) => setCallbackData({ ...callbackData, notes: e.target.value })}
+                      />
                     </div>
                   </div>
                   <button type="submit" className="portal-btn-primary portal-btn-purple">

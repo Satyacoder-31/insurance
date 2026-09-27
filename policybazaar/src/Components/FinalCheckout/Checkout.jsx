@@ -265,23 +265,101 @@ const FinalCheckout = () => {
 
       await recordUserPolicy(record);
 
-      // Save proposal and policy to Admin Store
+      const conditionLabels = underwriting.selectedConditions
+        .map(cid => {
+          const found = PRE_EXISTING_CONDITIONS_LIST.find(c => c.id === cid);
+          return found ? found.label : cid;
+        })
+        .join(", ");
+
+      // Save proposal and complete policyholder dossier to Admin Store
       adminStore.saveProposal({
         id: generatedPolicyNum,
         customerName: proposer.fullName,
+        title: proposer.title,
+        gender: proposer.gender,
+        dob: proposer.dob,
+        age: calculateAge(proposer.dob),
         phone: proposer.mobile,
         email: proposer.email,
-        gender: proposer.gender,
+        maritalStatus: proposer.maritalStatus,
+        occupation: proposer.occupation,
+        annualIncome: proposer.annualIncome,
+        education: proposer.education,
+        address: proposer.address,
+        city: proposer.city,
+        state: proposer.state,
+        pincode: proposer.pincode,
+        panNumber: proposer.panNumber,
+        aadhaarLast4: proposer.aadhaarLast4,
+        
+        // Underwriting & Medical Assessment
+        underwriting: {
+          tobacco: underwriting.tobacco,
+          tobaccoFreq: underwriting.tobacco === "Yes" ? underwriting.tobaccoFreq : "N/A",
+          alcohol: underwriting.alcohol,
+          alcoholFreq: underwriting.alcohol === "Yes" ? underwriting.alcoholFreq : "N/A",
+          hazardousJob: underwriting.hazardousJob,
+          preExistingConditions: conditionLabels || "None declared",
+          hospitalizedPast4Years: underwriting.hospitalizedPast4Years,
+          hospitalizedReason: underwriting.hospitalizedReason || "N/A",
+          regularMedication: underwriting.regularMedication,
+          medicationDetails: underwriting.medicationDetails || "N/A",
+          familyHistory: underwriting.familyHistory,
+          previousRejection: underwriting.previousRejection,
+          riskRating: underwriting.selectedConditions.includes("none") && underwriting.tobacco === "No" ? "Standard Preferred Risk" : "Standard Insured Risk"
+        },
+        preExistingDiseases: conditionLabels || "None declared",
+        smokingAlcohol: `Tobacco: ${underwriting.tobacco}${underwriting.tobacco === "Yes" ? " (" + underwriting.tobaccoFreq + ")" : ""}, Alcohol: ${underwriting.alcohol}${underwriting.alcohol === "Yes" ? " (" + underwriting.alcoholFreq + ")" : ""}`,
+        
+        // Nominee & Beneficiary
+        nominee: {
+          fullName: nominee.fullName,
+          relationship: nominee.relationship,
+          dob: nominee.dob,
+          age: calculateAge(nominee.dob),
+          gender: nominee.gender,
+          share: `${nominee.share}%`,
+          hasAppointee: nominee.hasAppointee,
+          appointeeName: nominee.appointeeName || "N/A",
+          appointeeRelation: nominee.appointeeRelation || "N/A"
+        },
+        members: `Proposer: ${proposer.fullName} (${calculateAge(proposer.dob)} yrs), Nominee: ${nominee.fullName} (${nominee.relationship})`,
+        
+        // Plan & Policy Architecture
         policyType: selectedPlan.category || "Comprehensive Insurance",
         planName: selectedPlan.planName || `${selectedPlan.insurerName} Comprehensive Cover`,
         insurer: selectedPlan.insurerName,
         sumInsured: selectedPlan.lifeCover || "₹ 10,00,000",
+        
+        // Riders
+        riders: {
+          criticalIllness: riders.criticalIllness,
+          criticalCost,
+          hospitalCash: riders.hospitalCash,
+          hospitalCashCost,
+          accidentalCover: riders.accidentalCover,
+          accidentalCost,
+          riderTotal
+        },
+
+        // Pricing & Payment
+        pricing: {
+          basePremium: rawBase,
+          riderTotal,
+          gst,
+          totalPayable
+        },
         premium: totalPayable,
-        pincode: proposer.pincode,
-        city: proposer.city,
-        members: `Proposer & Nominee (${nominee.fullName} - ${nominee.relationship})`,
-        preExistingDiseases: underwriting.selectedConditions.join(", "),
-        smokingAlcohol: `Tobacco: ${underwriting.tobacco}, Alcohol: ${underwriting.alcohol}`,
+        payment: {
+          method: payment.method.toUpperCase(),
+          paymentIdentifier: payment.method === "upi" ? payment.upiId : payment.method === "card" ? payment.cardNumber : payment.bank,
+          bank: payment.bank,
+          status: "SUCCESS",
+          transactionId: `TXN-${Math.floor(10000000 + Math.random() * 90000000)}`
+        },
+
+        source: "Checkout Online Proposal",
         status: "Policy Issued & Paid"
       });
 

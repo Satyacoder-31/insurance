@@ -57,10 +57,16 @@ export const ClaimPortal = () => {
   const [formData, setFormData] = useState({
     policyNumber: '',
     patientName: '',
+    relationship: 'Self',
+    insurer: 'Star Health Insurance',
     hospitalName: '',
+    treatingDoctor: '',
+    diagnosis: '',
     admissionDate: '',
     estimatedAmount: '',
-    contactNumber: ''
+    contactNumber: '',
+    email: '',
+    roomType: 'Single Private Room'
   });
   const [newClaimSubmitted, setNewClaimSubmitted] = useState(null);
 
@@ -83,18 +89,25 @@ export const ClaimPortal = () => {
       contact: formData.contactNumber || '9876543210'
     });
 
-    // Save claim into admin store
+    // Save claim with all filled fields into admin store
     adminStore.saveClaim({
       claimId: generatedId,
       claimType: claimType,
       policyNumber: formData.policyNumber || 'POL-SH-928172',
       patientName: formData.patientName || 'Policyholder',
+      relationship: formData.relationship || 'Self',
+      insurer: formData.insurer || 'Star Health Insurance',
       hospitalName: formData.hospitalName || 'Network Healthcare Provider',
+      treatingDoctor: formData.treatingDoctor || 'Dr. Attending Specialist',
+      diagnosis: formData.diagnosis || 'Hospitalization & Treatment',
       admissionDate: formData.admissionDate || new Date().toISOString().split('T')[0],
       phone: formData.contactNumber || '9876543210',
-      estimatedAmount: formData.estimatedAmount || '₹ 1,50,000',
+      email: formData.email || `${(formData.patientName || 'claimant').toLowerCase().replace(/\s+/g, '.')}@example.com`,
+      estimatedAmount: formData.estimatedAmount ? (formData.estimatedAmount.startsWith('₹') ? formData.estimatedAmount : `₹ ${Number(formData.estimatedAmount.replace(/[^\d]/g, '') || 150000).toLocaleString()}`) : '₹ 1,50,000',
+      approvedAmount: 'Under Review',
+      roomType: formData.roomType,
       status: 'Claim Lodged',
-      surveyorNotes: '30-minute cashless advocate assigned.'
+      surveyorNotes: '30-minute cashless advocate assigned. Pre-authorization verification in progress.'
     });
   };
 
@@ -277,6 +290,22 @@ export const ClaimPortal = () => {
                   </div>
 
                   <div className="portal-form-group">
+                    <label>Insurance Partner</label>
+                    <select 
+                      value={formData.insurer} 
+                      onChange={(e) => setFormData({ ...formData, insurer: e.target.value })}
+                    >
+                      <option value="Star Health Insurance">Star Health Insurance</option>
+                      <option value="Care Health Insurance">Care Health Insurance</option>
+                      <option value="HDFC ERGO Health">HDFC ERGO Health</option>
+                      <option value="Niva Bupa Health">Niva Bupa Health</option>
+                      <option value="ICICI Prudential Life">ICICI Prudential Life</option>
+                      <option value="Tata AIG GIC">Tata AIG General</option>
+                      <option value="Bajaj Allianz">Bajaj Allianz General</option>
+                    </select>
+                  </div>
+
+                  <div className="portal-form-group">
                     <label>Policy Number</label>
                     <input 
                       type="text" 
@@ -299,13 +328,48 @@ export const ClaimPortal = () => {
                   </div>
 
                   <div className="portal-form-group">
-                    <label>Hospital or Network Center</label>
+                    <label>Relationship to Policyholder</label>
+                    <select 
+                      value={formData.relationship} 
+                      onChange={(e) => setFormData({ ...formData, relationship: e.target.value })}
+                    >
+                      <option value="Self">Self (Primary Insured)</option>
+                      <option value="Spouse">Spouse</option>
+                      <option value="Son">Son</option>
+                      <option value="Daughter">Daughter</option>
+                      <option value="Father">Father</option>
+                      <option value="Mother">Mother</option>
+                    </select>
+                  </div>
+
+                  <div className="portal-form-group">
+                    <label>Hospital or Network Facility</label>
                     <input 
                       type="text" 
-                      placeholder="Hospital Name & City" 
+                      placeholder="Hospital Name, Branch & City" 
                       required
                       value={formData.hospitalName}
                       onChange={(e) => setFormData({ ...formData, hospitalName: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="portal-form-group">
+                    <label>Attending Doctor / Specialist</label>
+                    <input 
+                      type="text" 
+                      placeholder="Dr. Name & Specialization" 
+                      value={formData.treatingDoctor}
+                      onChange={(e) => setFormData({ ...formData, treatingDoctor: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="portal-form-group">
+                    <label>Diagnosis / Treatment Reason</label>
+                    <input 
+                      type="text" 
+                      placeholder="e.g. Dengue Fever / Appendectomy" 
+                      value={formData.diagnosis}
+                      onChange={(e) => setFormData({ ...formData, diagnosis: e.target.value })}
                     />
                   </div>
 
@@ -320,13 +384,33 @@ export const ClaimPortal = () => {
                   </div>
 
                   <div className="portal-form-group">
-                    <label>Mobile Number for Updates</label>
+                    <label>Estimated Treatment Amount (₹)</label>
+                    <input 
+                      type="text" 
+                      placeholder="e.g. ₹ 1,50,000" 
+                      value={formData.estimatedAmount}
+                      onChange={(e) => setFormData({ ...formData, estimatedAmount: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="portal-form-group">
+                    <label>Mobile Number for 30-Min SLA</label>
                     <input 
                       type="tel" 
                       placeholder="10-digit Mobile Number" 
                       required
                       value={formData.contactNumber}
                       onChange={(e) => setFormData({ ...formData, contactNumber: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="portal-form-group">
+                    <label>Email Address for Claim Updates</label>
+                    <input 
+                      type="email" 
+                      placeholder="name@example.com" 
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     />
                   </div>
                 </div>

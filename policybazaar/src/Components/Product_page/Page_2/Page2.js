@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./Page2.css";
 import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +12,27 @@ export const Page2 = () => {
     // Check if at least one member is selected, otherwise default to self
     const selectedMembers = s.filter(k => data[k] === true);
     const membersToDisplay = selectedMembers.length > 0 ? selectedMembers : ['self'];
+
+    const initialAges = {};
+    membersToDisplay.forEach(m => {
+        initialAges[m] = m === 'self' || m === 'spouse' ? 32 : m === 'father' || m === 'mother' ? 60 : 8;
+    });
+
+    const [ages, setAges] = useState(initialAges);
+
+    const handleAgeChange = (member, val) => {
+        setAges(prev => ({
+            ...prev,
+            [member]: parseInt(val) || val
+        }));
+    };
+
+    const handleContinue = () => {
+        try {
+            sessionStorage.setItem("wizardAges", JSON.stringify(ages));
+        } catch (e) {}
+        navigate('/health/pincode');
+    };
 
     return (
         <div className='wizard-step-container'>
@@ -34,7 +55,8 @@ export const Page2 = () => {
                                 type="number" 
                                 min='1' 
                                 max='100' 
-                                defaultValue={key === 'self' || key === 'spouse' ? 32 : key === 'father' || key === 'mother' ? 60 : 8} 
+                                value={ages[key] || 32}
+                                onChange={(e) => handleAgeChange(key, e.target.value)}
                                 placeholder={`Enter age`} 
                             />
                         </div>
@@ -42,7 +64,7 @@ export const Page2 = () => {
                 </div>
 
                 <div className="wizard-action-row">
-                    <button className="btn-wizard-next" onClick={() => navigate('/health/pincode')}>
+                    <button className="btn-wizard-next" onClick={handleContinue}>
                         Continue <FiArrowRight size={16} />
                     </button>
                 </div>

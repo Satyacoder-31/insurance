@@ -27,6 +27,9 @@ export const Family_right = () => {
 
     const handleContinue = (e) => {
         if (e && e.preventDefault) e.preventDefault();
+        try {
+            sessionStorage.setItem("wizardMembers", JSON.stringify(details));
+        } catch (err) {}
         Health_action(details, dispatch);
         navigate('/health/age');
     };

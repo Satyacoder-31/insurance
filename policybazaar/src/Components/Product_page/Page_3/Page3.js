@@ -49,7 +49,15 @@ export const Page3 = () => {
         </div>
 
         <div className="wizard-action-row" style={{ marginTop: "24px" }}>
-          <button className="btn-wizard-next" onClick={() => navigate('/health/contact')}>
+          <button 
+            className="btn-wizard-next" 
+            onClick={() => {
+              try {
+                sessionStorage.setItem("wizardCity", city);
+              } catch (e) {}
+              navigate('/health/contact');
+            }}
+          >
             Continue <FiArrowRight size={16} />
           </button>
         </div>
