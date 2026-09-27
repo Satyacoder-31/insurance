@@ -148,6 +148,7 @@ const FinalCheckout = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [policyIssued, setPolicyIssued] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [proposalId] = useState(() => `SL-${new Date().getFullYear()}-POL-${Math.floor(100000 + Math.random() * 900000)}`);
 
   // Price calculations
   const rawBase = typeof selectedPlan.premium === "number" ? selectedPlan.premium : parseInt(selectedPlan.premium) || 849;
@@ -232,6 +233,38 @@ const FinalCheckout = () => {
     if (currentStep === 2 && !validateStep2()) return;
     if (currentStep === 3 && !validateStep3()) return;
 
+    // Save in-progress customer proposal into Admin Store as Pending Approval
+    if (proposer.fullName.trim()) {
+      adminStore.saveProposal({
+        id: proposalId,
+        customerName: proposer.fullName,
+        title: proposer.title,
+        gender: proposer.gender,
+        dob: proposer.dob,
+        age: calculateAge(proposer.dob),
+        phone: proposer.mobile,
+        email: proposer.email,
+        maritalStatus: proposer.maritalStatus,
+        occupation: proposer.occupation,
+        annualIncome: proposer.annualIncome,
+        education: proposer.education,
+        address: proposer.address,
+        city: proposer.city,
+        state: proposer.state,
+        pincode: proposer.pincode,
+        panNumber: proposer.panNumber,
+        aadhaarLast4: proposer.aadhaarLast4,
+        policyType: selectedPlan.category || "Comprehensive Insurance",
+        planName: selectedPlan.planName || `${selectedPlan.insurerName} Comprehensive Cover`,
+        insurer: selectedPlan.insurerName,
+        sumInsured: selectedPlan.lifeCover || "₹ 10,00,000",
+        premium: totalPayable,
+        members: `Proposer: ${proposer.fullName} (${calculateAge(proposer.dob)} yrs)${nominee.fullName ? ', Nominee: ' + nominee.fullName : ''}`,
+        source: "Checkout Online Proposal (In Progress)",
+        status: "Pending Approval"
+      });
+    }
+
     setCurrentStep((prev) => Math.min(prev + 1, 4));
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -251,7 +284,7 @@ const FinalCheckout = () => {
     setIsProcessing(true);
 
     try {
-      const generatedPolicyNum = `SL-${new Date().getFullYear()}-POL-${Math.floor(100000 + Math.random() * 900000)}`;
+      const generatedPolicyNum = proposalId;
 
       // Save policy record to Supabase
       const record = {

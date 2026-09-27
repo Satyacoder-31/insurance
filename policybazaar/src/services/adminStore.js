@@ -769,16 +769,30 @@ export const adminStore = {
   
   saveProposal: (proposal) => {
     const list = adminStore.getProposals();
-    const newEntry = {
-      id: proposal.id || `APP-2026-${Math.floor(1000 + Math.random() * 9000)}`,
-      status: proposal.status || "Pending Approval",
-      createdAt: new Date().toISOString(),
-      adminNote: proposal.adminNote || "Form submitted by customer. Ready for underwriting verification.",
-      ...proposal,
-    };
-    const updated = [newEntry, ...list];
+    const existingIndex = proposal.id ? list.findIndex(item => item.id === proposal.id) : -1;
+    let updated;
+    let savedItem;
+
+    if (existingIndex >= 0) {
+      savedItem = {
+        ...list[existingIndex],
+        ...proposal,
+        updatedAt: new Date().toISOString()
+      };
+      updated = [...list];
+      updated[existingIndex] = savedItem;
+    } else {
+      savedItem = {
+        id: proposal.id || `APP-2026-${Math.floor(1000 + Math.random() * 9000)}`,
+        status: proposal.status || "Pending Approval",
+        createdAt: new Date().toISOString(),
+        adminNote: proposal.adminNote || "Form submitted by customer. Ready for underwriting verification.",
+        ...proposal,
+      };
+      updated = [savedItem, ...list];
+    }
     setStorageList(PROPOSALS_KEY, updated);
-    return newEntry;
+    return savedItem;
   },
 
   updateProposalStatus: (id, status) => {

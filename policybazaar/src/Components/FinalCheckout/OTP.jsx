@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { recordUserPolicy } from "../../supabaseClient";
+import adminStore from "../../services/adminStore";
 import "./Checkout.css";
 
 const OTP = () => {
@@ -24,6 +25,19 @@ const OTP = () => {
         insurerName: "SafeLife Partner Insurer",
         planName: "Comprehensive Protection Plan",
         premium: 9212,
+      });
+
+      // Record approved and paid policy in Admin Store
+      adminStore.saveProposal({
+        customerName: user.name || "Customer",
+        phone: user.phoneNumber || "9876543210",
+        policyType: "Health & Life Insurance",
+        insurer: "SafeLife Partner Insurer",
+        planName: "Comprehensive Protection Plan",
+        sumInsured: "₹ 10,00,000",
+        premium: 9212,
+        source: "OTP Payment Gateway",
+        status: "Policy Issued & Paid"
       });
 
       setLoading(false);

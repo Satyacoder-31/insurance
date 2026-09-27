@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Userdetails } from './Action';
 import "./Rightside.css";
 import { FiShield, FiArrowRight } from "react-icons/fi";
+import adminStore from '../../../services/adminStore';
 
 export const RightSide = () => {
     const [data, setData] = React.useState({
@@ -18,6 +19,29 @@ export const RightSide = () => {
 
     function HandleSubmit(e) {
         if (e && e.preventDefault) e.preventDefault();
+        
+        if (data.name.trim() || data.number.trim()) {
+            adminStore.saveProposal({
+                customerName: data.name.trim() || 'Term Applicant',
+                gender: data.gender === 'male' ? 'Male' : 'Female',
+                dob: data.date || '1995-01-01',
+                phone: data.number.trim() || '9876543210',
+                email: `${(data.name.trim() || 'applicant').toLowerCase().replace(/\s+/g, '.')}@example.com`,
+                city: 'Mumbai',
+                pincode: '400001',
+                policyType: 'Life & Term Insurance',
+                planName: '₹1 Crore Pure Term Protection Shield',
+                insurer: 'ICICI / HDFC / Tata AIA Multi-Partner',
+                sumInsured: '₹ 1,00,00,000',
+                premium: 6840,
+                members: 'Self (Life Assured)',
+                preExistingDiseases: 'Clean Medical Declaration',
+                smokingAlcohol: 'Non-smoker',
+                source: 'Term Life Insurance Application Form',
+                status: 'Pending Approval'
+            });
+        }
+
         Userdetails(data, dispatch);
         navigate('/plans');
     }
