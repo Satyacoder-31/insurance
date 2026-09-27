@@ -1,0 +1,9 @@
+{
+  "name": "policybazaar-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "cd policybazaar && npm run build",
+    "install": "cd policybazaar && npm install"
+  }
+}

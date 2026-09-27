@@ -1,0 +1,10 @@
+{
+  "buildCommand": "cd policybazaar && CI=false npm run build",
+  "outputDirectory": "policybazaar/build",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
