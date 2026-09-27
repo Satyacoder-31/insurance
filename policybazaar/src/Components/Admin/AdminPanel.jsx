@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import './AdminPanel.css';
 import adminStore from '../../services/adminStore';
 import safelifeLogo from '../../assets/images/safelife-logo.svg';
@@ -27,12 +27,15 @@ import {
   FiUsers,
   FiCreditCard,
   FiSave,
-  FiActivity
+  FiActivity,
+  FiLogOut
 } from 'react-icons/fi';
 import { RiHospitalLine, RiCustomerService2Line, RiTimeLine } from 'react-icons/ri';
 import { FaHeartbeat } from 'react-icons/fa';
 
 export const AdminPanel = () => {
+  const navigate = useNavigate();
+  const [currentAdmin, setCurrentAdmin] = useState(adminStore.getActiveAdmin());
   const [searchParams, setSearchParams] = useSearchParams();
   const initialTab = searchParams.get('tab') || 'pending-forms';
 
@@ -72,8 +75,19 @@ export const AdminPanel = () => {
   };
 
   useEffect(() => {
+    const admin = adminStore.getActiveAdmin();
+    if (!admin) {
+      navigate('/admin/login');
+      return;
+    }
+    setCurrentAdmin(admin);
     refreshData();
-  }, []);
+  }, [navigate]);
+
+  const handleSignOut = () => {
+    adminStore.logoutAdmin();
+    navigate('/admin/login');
+  };
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -252,6 +266,23 @@ export const AdminPanel = () => {
         </div>
 
         <div className="admin-top-actions">
+          {currentAdmin && (
+            <div className="admin-profile-pill">
+              <span className="admin-profile-avatar">{currentAdmin.avatar || '👤'}</span>
+              <div className="admin-profile-info">
+                <strong>{currentAdmin.name}</strong>
+                <span>{currentAdmin.role}</span>
+              </div>
+              <button 
+                className="admin-btn-signout" 
+                onClick={handleSignOut}
+                title="Sign out of Administrator Session"
+              >
+                <FiLogOut size={13} /> Sign Out
+              </button>
+            </div>
+          )}
+
           <button className="admin-btn-back" onClick={refreshData} title="Refresh Live Database">
             <FiRefreshCw size={14} /> Refresh Data
           </button>

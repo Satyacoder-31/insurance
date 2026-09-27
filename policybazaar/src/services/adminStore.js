@@ -4,6 +4,64 @@ const CLAIMS_KEY = "safelife_admin_claims";
 const TICKETS_KEY = "safelife_admin_tickets";
 const CALLBACKS_KEY = "safelife_admin_callbacks";
 const RENEWALS_KEY = "safelife_admin_renewals";
+const ACCOUNTS_KEY = "safelife_admin_accounts";
+const SESSION_KEY = "safelife_active_admin";
+
+// Initial Individual Administrator Credentials
+export const defaultAdminAccounts = [
+  {
+    id: "ADM-001",
+    name: "Dr. Priya Nair",
+    email: "underwriter@safelife.com",
+    password: "Underwrite#2026",
+    role: "Senior Medical Underwriter",
+    department: "Underwriting & Risk Desk",
+    avatar: "👨🏻‍⚕️",
+    badgeColor: "#fbbf24",
+    empId: "EMP-UND-8801",
+    permissions: ["APPROVE_PROPOSALS", "REJECT_PROPOSALS", "UNDERWRITE_RISK", "VIEW_DOSSIER"],
+    lastLogin: "2026-09-28T01:15:00.000Z"
+  },
+  {
+    id: "ADM-002",
+    name: "Vikram Batra",
+    email: "admin@safelife.com",
+    password: "Admin@2026",
+    role: "Executive Super Admin",
+    department: "Operations & Risk Control",
+    avatar: "🛡️",
+    badgeColor: "#3b82f6",
+    empId: "EMP-OPS-1001",
+    permissions: ["ALL_ACCESS", "APPROVE_PROPOSALS", "SETTLE_CLAIMS", "MANAGE_SUPPORT", "RENEWALS"],
+    lastLogin: "2026-09-28T01:30:00.000Z"
+  },
+  {
+    id: "ADM-003",
+    name: "Ramesh Kulkarni",
+    email: "claims@safelife.com",
+    password: "Claims#2026",
+    role: "Chief Claims Officer",
+    department: "TPA & Cashless Claims Desk",
+    avatar: "⚖️",
+    badgeColor: "#10b981",
+    empId: "EMP-CLM-4421",
+    permissions: ["APPROVE_CLAIMS", "REJECT_CLAIMS", "ASSIGN_SURVEYOR", "VIEW_REPORTS"],
+    lastLogin: "2026-09-27T18:45:00.000Z"
+  },
+  {
+    id: "ADM-004",
+    name: "Sunita Joshi",
+    email: "support@safelife.com",
+    password: "Support#2026",
+    role: "Customer Support Lead",
+    department: "Client Delight & Callbacks",
+    avatar: "🎧",
+    badgeColor: "#a78bfa",
+    empId: "EMP-SPT-9012",
+    permissions: ["MANAGE_TICKETS", "ASSIGN_CALLBACKS", "VIEW_POLICIES"],
+    lastLogin: "2026-09-27T19:20:00.000Z"
+  }
+];
 
 // Initial seed data for a rich out-of-the-box admin experience
 const defaultProposals = [
@@ -889,6 +947,68 @@ export const adminStore = {
       totalPremiumVolume,
     };
   },
+
+  // Admin Account & Authentication Management
+  getAdminAccounts: () => getStorageList(ACCOUNTS_KEY, defaultAdminAccounts),
+
+  createAdminAccount: (account) => {
+    const list = adminStore.getAdminAccounts();
+    const newAccount = {
+      id: `ADM-${Math.floor(100 + Math.random() * 900)}`,
+      empId: `EMP-${Math.floor(1000 + Math.random() * 9000)}`,
+      avatar: account.avatar || "👤",
+      badgeColor: account.badgeColor || "#38bdf8",
+      permissions: ["VIEW_DOSSIER", "APPROVE_PROPOSALS"],
+      createdAt: new Date().toISOString(),
+      ...account
+    };
+    const updated = [...list, newAccount];
+    setStorageList(ACCOUNTS_KEY, updated);
+    return newAccount;
+  },
+
+  authenticateAdmin: (email, password) => {
+    const list = adminStore.getAdminAccounts();
+    const cleanEmail = (email || '').trim().toLowerCase();
+    const found = list.find(acc => acc.email.toLowerCase() === cleanEmail && acc.password === password);
+    return found || null;
+  },
+
+  getActiveAdmin: () => {
+    try {
+      const sess = sessionStorage.getItem(SESSION_KEY);
+      if (sess) return JSON.parse(sess);
+      const loc = localStorage.getItem(SESSION_KEY);
+      if (loc) return JSON.parse(loc);
+    } catch (e) {
+      console.error("Error reading admin session", e);
+    }
+    return null;
+  },
+
+  setActiveAdmin: (adminUser, rememberMe = false) => {
+    try {
+      const payload = {
+        ...adminUser,
+        lastLogin: new Date().toISOString()
+      };
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(payload));
+      if (rememberMe) {
+        localStorage.setItem(SESSION_KEY, JSON.stringify(payload));
+      }
+    } catch (e) {
+      console.error("Error setting admin session", e);
+    }
+  },
+
+  logoutAdmin: () => {
+    try {
+      sessionStorage.removeItem(SESSION_KEY);
+      localStorage.removeItem(SESSION_KEY);
+    } catch (e) {
+      console.error("Error logging out admin", e);
+    }
+  }
 };
 
 export default adminStore;

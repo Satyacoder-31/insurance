@@ -17,6 +17,7 @@ import RenewalPortal from "../Portals/RenewalPortal";
 import ClaimPortal from "../Portals/ClaimPortal";
 import SupportPortal from "../Portals/SupportPortal";
 import AdminPanel from "../Admin/AdminPanel";
+import AdminLogin from "../Admin/AdminLogin";
 
 const AllRoutes = () => {
   return (
@@ -24,7 +25,8 @@ const AllRoutes = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
 
-        {/* Admin Control Center */}
+        {/* Admin Authentication & Control Center */}
+        <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin" element={<AdminPanel />} />
         <Route path="/admin/:tab" element={<AdminPanel />} />
         
